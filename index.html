@@ -1,83 +1,154 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>DBH Admin Centre</title><link rel="icon" href="https://dbanjushomes-com.onrender.com/dbh-logo.jpg"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"><style>:root{--b:#0876df;--d:#052b55;--ink:#0f172a;--muted:#64748b;--line:#dbe7f3}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#dbeeff,transparent 30%),linear-gradient(135deg,#f5f9ff,#fff);color:var(--ink);font:14px Inter,system-ui,sans-serif}.admin-side{position:fixed;inset:0 auto 0 0;width:265px;background:#fffffff0;backdrop-filter:blur(18px);border-right:1px solid var(--line);padding:18px 14px;z-index:50;display:flex;flex-direction:column;box-shadow:12px 0 40px #052b5510}.admin-brand{display:flex;align-items:center;gap:10px;padding:4px 7px 22px}.admin-brand img{width:42px;height:42px;border-radius:13px}.admin-brand strong{display:block;color:var(--d);font-size:13px}.admin-brand small{font-size:8px;color:#7a8da3;letter-spacing:.12em}.admin-side nav{display:grid;gap:4px}.admin-side-scroll{overflow-y:auto;overflow-x:hidden;flex:1}.admin-nav-group{margin:11px 0 15px}.admin-nav-heading{padding:0 11px 7px;font-size:9px;font-weight:950;letter-spacing:.15em;color:#91a1b5}.admin-side-close{display:none}.admin-side-footer{padding-top:10px;border-top:1px solid #e8eff7}.admin-security-note{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;background:#f1f7ff;color:#1762b2}.admin-security-note b,.admin-security-note small{display:block}.admin-security-note b{font-size:10px}.admin-security-note small{font-size:9px;color:#7188a1}.admin-sidebar-overlay{display:none}.admin-side-scroll{overflow-y:auto;overflow-x:hidden;flex:1}.admin-nav-group{margin:11px 0 15px}.admin-nav-heading{padding:0 11px 7px;font-size:9px;font-weight:950;letter-spacing:.15em;color:#91a1b5}.admin-side-close{display:none}.admin-side-footer{padding-top:10px;border-top:1px solid #e8eff7}.admin-security-note{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;background:#f1f7ff;color:#1762b2}.admin-security-note b,.admin-security-note small{display:block}.admin-security-note b{font-size:10px}.admin-security-note small{font-size:9px;color:#7188a1}.admin-nav-link,.admin-logout{border:0;background:none;text-decoration:none;color:#53657a;display:flex;align-items:center;gap:12px;padding:12px;border-radius:13px;font-weight:800;font-size:11px;text-align:left;cursor:pointer;transition:.25s}.admin-nav-link i,.admin-logout i{width:20px;text-align:center;font-size:15px}.admin-nav-link:hover{transform:translateX(4px);background:#eaf4ff;color:var(--b)}.admin-nav-link.active{background:linear-gradient(135deg,#e8f3ff,#dff0ff);color:var(--b);box-shadow:inset 3px 0 var(--b)}.admin-logout{margin-top:auto;color:#dc3545}.admin-logout:hover{background:#fff1f2;transform:translateX(4px)}.admin-main{margin-left:265px;padding:24px;max-width:1600px}.admin-top{height:40px;display:flex;align-items:center;gap:12px}.admin-mobile-title{display:none;font-weight:900;color:var(--d)}.menu{display:none;border:0;background:#fff;border-radius:12px;padding:11px 13px;box-shadow:0 8px 24px #052b5514}.hero{position:relative;overflow:hidden;min-height:300px;padding:34px;border-radius:30px;color:#fff;background:linear-gradient(125deg,#042750,#0876df 58%,#06a6df);box-shadow:0 25px 70px #0876df35}.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);animation:orb 7s ease-in-out infinite}.hero:before{width:280px;height:280px;right:-70px;top:-100px;background:#fff2}.hero:after{width:160px;height:160px;right:28%;bottom:-80px;background:#22d3ee2b}.hero-content{position:relative;z-index:2;max-width:760px}.eyebrow{font-size:10px;letter-spacing:.18em;font-weight:950;color:#bfdbfe}.hero h1{font-size:clamp(32px,5vw,58px);line-height:1;margin:12px 0}.hero p{max-width:680px;color:#dbeafe;line-height:1.7}.live{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:9px 12px;border:1px solid #ffffff35;border-radius:999px;background:#ffffff12;font-size:10px;font-weight:900}.live i{color:#67e8f9;animation:pulse 1.6s infinite}.section-title{display:flex;justify-content:space-between;align-items:end;margin:25px 0 12px}.section-title h2{margin:0;color:var(--d);font-size:18px}.section-title span{font-size:10px;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.stat{position:relative;overflow:hidden;background:#ffffffd6;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 12px 35px #052b550a;transition:.3s}.stat:hover{transform:translateY(-6px);box-shadow:0 22px 45px #0876df18}.stat:after{content:"";position:absolute;width:80px;height:80px;right:-25px;top:-25px;border-radius:50%;background:#0876df12}.stat-icon,.quick-icon{display:grid;place-items:center;background:#eaf4ff;color:var(--b)}.stat-icon{width:43px;height:43px;border-radius:14px;font-size:17px;margin-bottom:14px}.stat-label{font-size:10px;font-weight:900;color:var(--muted)}.stat-value{font-size:30px;font-weight:950;color:var(--d);margin-top:5px}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.quick a{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;text-decoration:none;color:inherit;transition:.3s;box-shadow:0 12px 30px #052b5508}.quick a:hover{transform:translateY(-7px);border-color:#9bcaff;box-shadow:0 22px 45px #0876df16}.quick-icon{width:48px;height:48px;border-radius:15px;font-size:18px;margin-bottom:14px}.quick b{color:var(--d)}.quick small{display:block;color:var(--muted);margin-top:6px;line-height:1.5}.auth-note{display:none;margin:12px 0;padding:12px;border-radius:12px;background:#fff7ed;color:#9a3412;font-size:11px}.admin-auth-check-failed .auth-note{display:block}@keyframes orb{50%{transform:translate(-25px,25px) scale(1.08)}}@keyframes pulse{50%{opacity:.35;transform:scale(.75)}}@media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}}@media(max-width:800px){.admin-side{transform:translateX(-105%);transition:.3s}.admin-side.open{transform:translateX(0)}.admin-side-close{display:inline-flex;margin-left:auto;border:0;background:#eef5ff;color:#1d5fb8;border-radius:10px;padding:8px}.admin-sidebar-overlay{display:block;position:fixed;inset:0;z-index:49;border:0;background:#061a30a8;opacity:0;pointer-events:none;transition:opacity .25s}.admin-sidebar-overlay.show{opacity:1;pointer-events:auto}.admin-main{margin-left:0;padding:16px}.menu{display:inline-flex}.admin-mobile-title{display:inline}.admin-side-close{display:inline-flex;margin-left:auto;border:0;background:#eef5ff;color:#1d5fb8;border-radius:10px;padding:8px}.admin-sidebar-overlay{display:block;position:fixed;inset:0;z-index:49;border:0;background:#061a30a8;opacity:0;pointer-events:none;transition:opacity .25s}.admin-sidebar-overlay.show{opacity:1;pointer-events:auto}.stats{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:1fr}.hero{min-height:270px;padding:25px;border-radius:24px}}@media(max-width:480px){.stats{grid-template-columns:1fr}.hero h1{font-size:36px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style></head><body><div id="dbhAdminSidebar"></div><main class="admin-main"><div class="admin-top"><button class="menu" id="adminMenu" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button><span class="admin-mobile-title">DBH Admin Centre</span></div><div class="auth-note">Your admin session is active. The server authorization check is temporarily unavailable, so you are not being sent back to the login page.</div><section class="hero"><div class="hero-content"><div class="eyebrow">DBH ADMIN CONTROL CENTRE</div><h1>System Control Dashboard</h1><p>One secure workspace for agents, properties, payments, documents, notifications, reports and platform operations.</p><span class="live"><i class="fa-solid fa-circle"></i> LIVE PLATFORM OVERVIEW</span></div></section><div class="section-title"><h2>Platform overview</h2><span>Live Supabase data</span></div><section class="stats"><div class="stat"><div class="stat-icon"><i class="fa-solid fa-user-tie"></i></div><div class="stat-label">AGENT APPLICATIONS</div><div class="stat-value" id="agents">—</div></div><div class="stat"><div class="stat-icon"><i class="fa-solid fa-house"></i></div><div class="stat-label">PROPERTIES</div><div class="stat-value" id="properties">—</div></div><div class="stat"><div class="stat-icon"><i class="fa-solid fa-credit-card"></i></div><div class="stat-label">PAYMENT RECORDS</div><div class="stat-value" id="payments">—</div></div><div class="stat"><div class="stat-icon"><i class="fa-solid fa-clock"></i></div><div class="stat-label">PENDING REVIEWS</div><div class="stat-value" id="pending">—</div></div><div class="stat"><div class="stat-icon"><i class="fa-solid fa-user-shield"></i></div><div class="stat-label">ADMIN STAFF</div><div class="stat-value" id="staff">—</div></div></section><div class="section-title"><h2>Quick control</h2><span>Common admin actions</span></div><section class="quick"><a href="agents.html"><div class="quick-icon"><i class="fa-solid fa-user-check"></i></div><b>Review Agents</b><small>Approve, suspend and manage agent applications.</small></a><a href="properties.html"><div class="quick-icon"><i class="fa-solid fa-house-circle-check"></i></div><b>Review Properties</b><small>Inspect listings, verification and publishing status.</small></a><a href="notifications.html"><div class="quick-icon"><i class="fa-solid fa-paper-plane"></i></div><b>Send Notifications</b><small>Communicate important updates to platform users.</small></a></section></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/js/app.js"></script><script src="assets/js/admin.js"></script>
 <style id="dbh-dashboard-tour-styles">
-#dbhTourLauncher{position:fixed;right:22px;bottom:22px;z-index:80;display:flex;align-items:center;gap:9px;border:0;border-radius:999px;padding:13px 17px;background:linear-gradient(135deg,#0757a6,#0788ee);color:#fff;font:800 12px Inter,system-ui,sans-serif;box-shadow:0 12px 32px #0876df45;cursor:pointer;animation:dbhTourPulse 2.8s ease-in-out infinite}
-#dbhTourLauncher i{font-size:14px}
-#dbhTourOverlay{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(3,18,37,.78);backdrop-filter:blur(8px)}
-#dbhTourOverlay.open{display:flex;animation:dbhTourFade .25s ease both}
-#dbhTourCard{position:relative;width:min(620px,100%);max-height:min(760px,92vh);overflow:auto;border:1px solid #ffffffaa;border-radius:26px;background:linear-gradient(155deg,#fff,#f4f9ff);box-shadow:0 35px 110px #00152e66;color:#10243b;padding:clamp(22px,4vw,36px)}
-.dbh-tour-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:23px}
-.dbh-tour-brand{display:flex;align-items:center;gap:9px;color:#0757a6;font-size:10px;font-weight:950;letter-spacing:.13em}
-.dbh-tour-brand i{display:grid;place-items:center;width:35px;height:35px;border-radius:12px;background:#e4f1ff;font-size:15px}
-.dbh-tour-count{font-size:11px;color:#64748b;font-weight:800;white-space:nowrap}
-.dbh-tour-progress{height:5px;background:#e1eaf5;border-radius:99px;overflow:hidden;margin:-8px 0 25px}
-#dbhTourProgressBar{height:100%;width:16.666%;background:linear-gradient(90deg,#0876df,#22c1ee);border-radius:99px;transition:width .3s ease}
-.dbh-tour-symbol{display:grid;place-items:center;width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,#e7f3ff,#d7f3ff);color:#0876df;font-size:24px;margin-bottom:18px;box-shadow:inset 0 0 0 1px #c7e3ff}
-#dbhTourTitle{font-size:clamp(23px,4vw,30px);line-height:1.15;letter-spacing:-.035em;color:#052b55;margin:0 0 12px}
-#dbhTourText{font-size:14px;line-height:1.8;color:#52657b;margin:0;white-space:pre-line}
-.dbh-tour-tip{margin-top:20px;padding:13px 15px;border:1px solid #d7eaff;border-radius:14px;background:#edf6ff;color:#245b91;font-size:11px;line-height:1.65}
-.dbh-tour-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:28px}
-.dbh-tour-actions-left,.dbh-tour-actions-right{display:flex;align-items:center;gap:9px}
-.dbh-tour-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #d8e3ef;border-radius:12px;padding:11px 15px;background:#fff;color:#43566d;font:800 12px Inter,system-ui,sans-serif;cursor:pointer;transition:transform .2s,background .2s}
-.dbh-tour-btn:hover{transform:translateY(-1px);background:#f3f8ff}
-.dbh-tour-btn.primary{background:linear-gradient(135deg,#0757a6,#087fe2);border-color:transparent;color:#fff;box-shadow:0 8px 20px #0876df30}
-.dbh-tour-btn.skip{border-color:transparent;background:transparent;color:#718198}
-.dbh-tour-dots{display:flex;gap:5px;justify-content:center;margin-top:20px}
-.dbh-tour-dot{width:6px;height:6px;border-radius:99px;background:#cbd7e5;transition:all .2s}
-.dbh-tour-dot.active{width:20px;background:#0876df}
-@keyframes dbhTourFade{from{opacity:0}to{opacity:1}}
+#dbhTourLauncher{position:fixed;right:22px;bottom:22px;z-index:1200;display:flex;align-items:center;gap:9px;border:0;border-radius:999px;padding:13px 17px;background:linear-gradient(135deg,#0757a6,#0788ee);color:#fff;font:800 12px Inter,system-ui,sans-serif;box-shadow:0 12px 32px #0876df45;cursor:pointer;animation:dbhTourPulse 2.8s ease-in-out infinite}
+#dbhTourSpotlight{position:fixed;display:none;z-index:2000;pointer-events:none;border-radius:14px;box-shadow:0 0 0 9999px rgba(3,17,35,.76),0 0 0 4px rgba(41,157,255,.95),0 0 28px 8px rgba(20,136,255,.45);transition:top .32s ease,left .32s ease,width .32s ease,height .32s ease}
+#dbhTourSpotlight.show{display:block}
+#dbhTourTooltip{position:fixed;z-index:2003;display:none;width:min(360px,calc(100vw - 24px));padding:19px 19px 15px;background:#fff;color:#122a43;border:1px solid #d6e8fb;border-radius:19px;box-shadow:0 24px 80px #00152e70;font-family:Inter,system-ui,sans-serif}
+#dbhTourTooltip.show{display:block;animation:dbhTipIn .2s ease both}
+#dbhTourTooltip:before{content:"";position:absolute;width:13px;height:13px;background:#fff;border-left:1px solid #d6e8fb;border-top:1px solid #d6e8fb;transform:rotate(45deg);top:-7px;left:30px}
+#dbhTourTooltip.arrow-bottom:before{top:auto;bottom:-7px;transform:rotate(225deg)}
+.dbh-tip-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.dbh-tip-brand{display:flex;align-items:center;gap:7px;color:#0876df;font-size:9px;font-weight:950;letter-spacing:.12em}
+.dbh-tip-brand i{font-size:13px}
+#dbhTourCount{font-size:10px;font-weight:900;color:#64748b;white-space:nowrap}
+#dbhTourProgress{height:4px;background:#e4edf7;border-radius:99px;overflow:hidden;margin-bottom:16px}
+#dbhTourProgressFill{height:100%;width:0;background:linear-gradient(90deg,#0876df,#22c1ee);transition:width .25s}
+#dbhTourTitle{font-size:19px;line-height:1.2;color:#052b55;margin:0 0 8px;letter-spacing:-.025em}
+#dbhTourText{font-size:12px;line-height:1.7;color:#52657b;margin:0}
+#dbhTourTip{margin-top:12px;padding:10px 11px;background:#eff7ff;border:1px solid #d8ebff;border-radius:11px;color:#245b91;font-size:10px;line-height:1.55}
+.dbh-tip-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:15px}
+.dbh-tip-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #d8e3ef;border-radius:10px;padding:9px 12px;background:#fff;color:#42566e;font:800 11px Inter,system-ui,sans-serif;cursor:pointer}
+.dbh-tip-btn:disabled{opacity:.35;cursor:not-allowed}
+.dbh-tip-btn.primary{background:linear-gradient(135deg,#0757a6,#087fe2);border-color:transparent;color:#fff}
+.dbh-tip-btn.skip{border-color:transparent;color:#7b8da2;background:transparent}
+#dbhTourTargetArrow{position:fixed;z-index:2002;display:none;pointer-events:none;color:#31a4ff;font-size:27px;filter:drop-shadow(0 2px 5px #00152e99);animation:dbhArrowBob .75s ease-in-out infinite alternate}
+#dbhTourTargetArrow.show{display:block}
+.dbh-tour-target-active{outline:2px solid #40b0ff!important;outline-offset:3px!important}
+@keyframes dbhTipIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @keyframes dbhTourPulse{0%,100%{box-shadow:0 12px 32px #0876df35}50%{box-shadow:0 12px 36px #0876df70}}
-@media(max-width:480px){#dbhTourOverlay{padding:12px}#dbhTourCard{border-radius:21px;padding:22px 19px}.dbh-tour-actions{align-items:stretch}.dbh-tour-actions-left,.dbh-tour-actions-right{gap:6px}.dbh-tour-btn{padding:10px 11px}.dbh-tour-tip{font-size:10px}#dbhTourLauncher{right:14px;bottom:14px;padding:12px 14px}}
-@media(prefers-reduced-motion:reduce){#dbhTourLauncher,#dbhTourOverlay,#dbhTourProgressBar,.dbh-tour-btn{animation:none!important;transition:none!important}}
+@keyframes dbhArrowBob{from{transform:translateY(-3px)}to{transform:translateY(4px)}}
+@media(max-width:800px){#dbhTourLauncher{right:14px;bottom:14px}#dbhTourTooltip{width:min(340px,calc(100vw - 20px));padding:16px}#dbhTourTitle{font-size:17px}#dbhTourSpotlight{border-radius:12px}}
+@media(prefers-reduced-motion:reduce){#dbhTourLauncher,#dbhTourTooltip,#dbhTourTargetArrow,#dbhTourSpotlight{animation:none!important;transition:none!important}}
 </style>
-<button id="dbhTourLauncher" type="button" aria-haspopup="dialog" aria-controls="dbhTourOverlay"><i class="fa-solid fa-circle-question"></i><span>How to use dashboard</span></button>
-<div id="dbhTourOverlay" role="dialog" aria-modal="true" aria-labelledby="dbhTourTitle" aria-describedby="dbhTourText">
-  <section id="dbhTourCard">
-    <div class="dbh-tour-top"><div class="dbh-tour-brand"><i class="fa-solid fa-compass"></i><span>DBH DASHBOARD GUIDE</span></div><div class="dbh-tour-count" id="dbhTourCount">STEP 1 OF 6</div></div>
-    <div class="dbh-tour-progress"><div id="dbhTourProgressBar"></div></div>
-    <div class="dbh-tour-symbol" id="dbhTourIcon"><i class="fa-solid fa-gauge-high"></i></div>
-    <h2 id="dbhTourTitle">Welcome to the DBH Admin Dashboard</h2>
-    <p id="dbhTourText">This guided tour explains how to use the dashboard, review platform activity, and reach the main administration tools.</p>
-    <div class="dbh-tour-tip" id="dbhTourTip">You can open this guide again at any time using the “How to use dashboard” button at the bottom-right of the page.</div>
-    <div class="dbh-tour-actions"><div class="dbh-tour-actions-left"><button class="dbh-tour-btn skip" id="dbhTourSkip" type="button">Skip tour</button></div><div class="dbh-tour-actions-right"><button class="dbh-tour-btn" id="dbhTourBack" type="button" disabled>Back</button><button class="dbh-tour-btn primary" id="dbhTourNext" type="button">Start tour <i class="fa-solid fa-arrow-right"></i></button></div></div>
-    <div class="dbh-tour-dots" id="dbhTourDots" aria-hidden="true"></div>
-  </section>
-</div>
+<button id="dbhTourLauncher" type="button" aria-haspopup="dialog" aria-controls="dbhTourTooltip"><i class="fa-solid fa-circle-question"></i><span>How to use dashboard</span></button>
+<div id="dbhTourSpotlight" aria-hidden="true"></div><div id="dbhTourTargetArrow" aria-hidden="true"><i class="fa-solid fa-arrow-down"></i></div>
+<section id="dbhTourTooltip" role="dialog" aria-modal="false" aria-labelledby="dbhTourTitle" aria-describedby="dbhTourText">
+  <div class="dbh-tip-top"><div class="dbh-tip-brand"><i class="fa-solid fa-location-crosshairs"></i><span>FOLLOW THE HIGHLIGHT</span></div><span id="dbhTourCount">1 / 1</span></div>
+  <div id="dbhTourProgress"><div id="dbhTourProgressFill"></div></div>
+  <h2 id="dbhTourTitle">Dashboard tour</h2><p id="dbhTourText"></p><div id="dbhTourTip"></div>
+  <div class="dbh-tip-actions"><button class="dbh-tip-btn skip" id="dbhTourSkip" type="button">End tour</button><div style="display:flex;gap:7px"><button class="dbh-tip-btn" id="dbhTourBack" type="button">Back</button><button class="dbh-tip-btn primary" id="dbhTourNext" type="button">Next <i class="fa-solid fa-arrow-right"></i></button></div></div>
+</section>
 <script>
 (()=> {
   const steps = [
-    {icon:'fa-compass',title:'Welcome to the DBH Admin Dashboard',text:'This guided tour explains how to use the dashboard, review platform activity, and reach the main administration tools. The dashboard is the starting point for managing D Banjus Homes Nig Ltd.',tip:'You can open this guide again at any time using the “How to use dashboard” button at the bottom-right of the page.'},
-    {icon:'fa-chart-pie',title:'1. Platform overview and statistics',text:'The five summary cards show the current counts for agent applications, properties, payment records, pending reviews, and admin staff. Use these figures as a quick overview before opening a section for detailed records.',tip:'If a value displays a dash, the data may still be loading or the dashboard query may need attention. A dash is not necessarily a zero.'},
-    {icon:'fa-bolt',title:'2. Quick control actions',text:'The Quick control cards provide shortcuts to common tasks. Review Agents is intended for agent review, Review Properties opens property management, and Send Notifications opens the notification area.',tip:'Use these shortcuts for speed. For the full list of sections, use the navigation menu on the left.'},
-    {icon:'fa-bars',title:'3. Navigation menu and sections',text:'The left navigation is grouped by purpose: Overview, Customer Section, Agent Section, Property Management, and Platform. Open the relevant section to work with customer records, agent applications and documents, listings, property approvals, payments, messages, reports, staff, tools, and settings.',tip:'On a phone or tablet, use the menu button at the top-left to open the navigation. Tap the close icon or the shaded area to close it.'},
-    {icon:'fa-shield-halved',title:'4. Admin access and safe operation',text:'The dashboard is for authorized DBH administrators. Sign out when you finish using a shared device. Only use the staff, payment, and account controls for tasks you are authorized to perform, and verify important changes before leaving a page.',tip:'If you see an authorization warning or a page fails to load, do not try to bypass access controls. Check the displayed error and resolve the account or configuration issue.'},
-    {icon:'fa-flag-checkered',title:'5. You are ready to begin',text:'Start with the overview, then choose the relevant navigation item or Quick control shortcut. You can return to this tour whenever you need a reminder of what each dashboard area is for.',tip:'This guide is shown automatically on the first visit in this browser. Choose “Finish tour” to close it; the bottom-right guide button remains available to replay it.'}
+    {selector:'.admin-brand',title:'Your DBH admin menu',text:'This is the DBH Admin navigation. The menu is grouped into sections so you can find customer, agent, property and platform tools.',tip:'On mobile, the menu opens as a slide-out panel. The tour will scroll the menu to each item for you.'},
+    {selector:'.admin-nav-link[href="index.html"]',title:'Dashboard',text:'Use Dashboard to return to this overview at any time. The statistic cards and quick actions give you a starting point for daily admin work.',tip:'The blue highlight marks the exact item being explained.'},
+    {selector:'.stats .stat:nth-child(1)',title:'Agent applications',text:'This card shows the number of agent applications reported by the dashboard. Open the agent application section to review individual submissions.',tip:'A dash means the value is unavailable or still loading; it does not automatically mean zero.'},
+    {selector:'.stats .stat:nth-child(2)',title:'Properties',text:'This card gives you a quick count of property records. Use the property management links to inspect listing details and approval status.',tip:'Use the detailed page when you need to review or change a specific property.'},
+    {selector:'.stats .stat:nth-child(3)',title:'Payment records',text:'This card summarizes payment records available to the dashboard. Use payment and receipt sections to inspect individual transactions.',tip:'Verify references and payment status before making any financial decision.'},
+    {selector:'.stats .stat:nth-child(4)',title:'Pending reviews',text:'This number highlights items that still need review. It helps you spot work that may require attention.',tip:'Open the appropriate application or property approval page to handle the actual review.'},
+    {selector:'.stats .stat:nth-child(5)',title:'Admin staff',text:'This card represents the administrator staff records. The Admin Staff section is where authorized staff management actions are handled.',tip:'Only grant staff access to people who should administer DBH.'},
+    {selector:'.quick a:nth-child(1)',title:'Quick action: Review Agents',text:'This shortcut takes you to the agent management area for reviewing and managing agents.',tip:'You can reach the same work from the Agent Section in the sidebar.'},
+    {selector:'.quick a:nth-child(2)',title:'Quick action: Review Properties',text:'Use this shortcut to open property management and inspect property listings and their status.',tip:'Review the details carefully before approving or publishing a listing.'},
+    {selector:'.quick a:nth-child(3)',title:'Quick action: Send Notifications',text:'This shortcut opens the notification area, where platform updates can be prepared for users.',tip:'Confirm the message and intended audience before sending a notification.'},
+    {selector:'.admin-nav-link[href="users.html"]',title:'All Customers',text:'Use this navigation item for customer account management and customer records.',tip:'If the page is unavailable, the page itself may still need to be created or connected.'},
+    {selector:'.admin-nav-link[href="customer-activity.html"]',title:'Customer Activity',text:'This area is intended to help you review customer activity on the platform.',tip:'Use activity information for support and administration, not to share private customer data.'},
+    {selector:'.admin-nav-link[href="saved-properties.html"]',title:'Saved Properties',text:'This area is intended to show properties customers have saved or bookmarked.',tip:'It can help support teams understand customer interest when the page is implemented.'},
+    {selector:'.admin-nav-link[href="customer-messages.html"]',title:'Customer Messages',text:'Use this area for messages associated with customer enquiries.',tip:'Respond professionally and avoid sharing customer information outside authorized channels.'},
+    {selector:'.admin-nav-link[href="agents.html"]',title:'All Agents',text:'This is the entry to agent management. Use it to find agent records and manage their status where the page supports those actions.',tip:'Agent account approval and property approval are separate decisions.'},
+    {selector:'.admin-nav-link[href="agent-applications.html"]',title:'Agent Applications',text:'Review applications submitted by people who want to become DBH agents. Check the submitted details before approving or rejecting.',tip:'Use the configured verification process and record decisions accurately.'},
+    {selector:'.admin-nav-link[href="agent-documents.html"]',title:'Agent Documents',text:'This section is intended for checking agent verification documents.',tip:'Treat identity and legal documents as confidential.'},
+    {selector:'.admin-nav-link[href="agent-payments.html"]',title:'Registration Payments',text:'Use this area to review agent registration fee records and payment status.',tip:'Confirm a transaction from trusted payment records rather than relying only on a screenshot.'},
+    {selector:'.admin-nav-link[href="agent-listings.html"]',title:'Agent Listings',text:'This section is intended to help you find property listings submitted by agents.',tip:'A submitted listing should go through the DBH review process before it is published to customers.'},
+    {selector:'.admin-nav-link[href="properties.html"]',title:'All Properties',text:'Open the full property management area to inspect available property records.',tip:'Check listing details, images, location and ownership documents according to DBH policy.'},
+    {selector:'.admin-nav-link[href="property-approvals.html"]',title:'Pending Approvals',text:'Use this section for property listings waiting for admin review.',tip:'Approve only after the required checks have been completed.'},
+    {selector:'.admin-nav-link[href="documents.html"]',title:'Property Documents',text:'This section is intended for managing or reviewing property-related documents.',tip:'Handle deeds and other legal documents securely.'},
+    {selector:'.admin-nav-link[href="payments.html"]',title:'Payments and Receipts',text:'Use this section for platform payment records and receipts.',tip:'Keep financial records accurate and investigate discrepancies before changing status.'},
+    {selector:'.admin-nav-link[href="notifications.html"]',title:'Notifications',text:'Open this area to prepare or manage notifications sent to platform users.',tip:'Check the wording and recipients before sending.'},
+    {selector:'.admin-nav-link[href="messages.html"]',title:'Customer Care and Messages',text:'This area is intended for customer care conversations and support messages.',tip:'Keep replies clear, respectful and relevant to the enquiry.'},
+    {selector:'.admin-nav-link[href="reports.html"]',title:'Reports and Analytics',text:'Use reports to review platform performance and operational activity when reporting features are available.',tip:'Use current data and confirm date ranges before relying on a report.'},
+    {selector:'.admin-nav-link[href="admin-staff.html"]',title:'Admin Staff',text:'This is where authorized administrators can manage DBH staff access and roles.',tip:'Grant only the minimum access a staff member needs. Be careful when suspending or changing roles.'},
+    {selector:'.admin-nav-link[href="tools.html"]',title:'Admin Tools',text:'This area is reserved for administrative utilities and platform maintenance tools.',tip:'Use maintenance actions carefully because they may affect the live platform.'},
+    {selector:'.admin-nav-link[href="settings.html"]',title:'Settings',text:'Open settings to manage supported dashboard and platform preferences.',tip:'Save changes deliberately and check the result after updating a setting.'},
+    {selector:'#adminLogout',title:'Sign out securely',text:'Use Sign out when you have finished administering DBH, especially on a shared computer.',tip:'Signing out ends your current admin session. You can sign in again when you need to continue.'},
+    {selector:'#dbhTourLauncher',title:'Replay this guided tour',text:'This button stays on the dashboard so you can replay the guide whenever you need help.',tip:'You can move Back or Next through the highlighted controls, or choose End tour at any time.'}
   ];
-  const $ = id => document.getElementById(id);
-  const overlay=$('dbhTourOverlay'), title=$('dbhTourTitle'), text=$('dbhTourText'), tip=$('dbhTourTip'), icon=$('dbhTourIcon'), count=$('dbhTourCount'), bar=$('dbhTourProgressBar'), back=$('dbhTourBack'), next=$('dbhTourNext'), skip=$('dbhTourSkip'), dots=$('dbhTourDots');
-  if(!overlay || !title || !text) return;
-  let index=0;
-  const storageKey='dbh-admin-dashboard-tour-v1';
-  function render(){
-    const s=steps[index];
-    title.textContent=s.title;text.textContent=s.text;tip.textContent=s.tip;
-    icon.innerHTML='<i class="fa-solid '+s.icon+'"></i>';
-    count.textContent='STEP '+(index+1)+' OF '+steps.length;
-    bar.style.width=((index+1)/steps.length*100)+'%';
-    back.disabled=index===0;back.style.opacity=index===0?'.45':'1';
-    next.innerHTML=index===steps.length-1?'Finish tour <i class="fa-solid fa-check"></i>':(index===0?'Start tour <i class="fa-solid fa-arrow-right"></i>':'Next <i class="fa-solid fa-arrow-right"></i>');
-    dots.innerHTML=steps.map((_,i)=>'<span class="dbh-tour-dot '+(i===index?'active':'')+'"></span>').join('');
+  const $=id=>document.getElementById(id);
+  const spotlight=$('dbhTourSpotlight'), tooltip=$('dbhTourTooltip'), arrow=$('dbhTourTargetArrow');
+  const title=$('dbhTourTitle'), body=$('dbhTourText'), tip=$('dbhTourTip'), count=$('dbhTourCount'), fill=$('dbhTourProgressFill'), back=$('dbhTourBack'), next=$('dbhTourNext'), skip=$('dbhTourSkip');
+  if(!spotlight||!tooltip||!title||!body)return;
+  let index=0,target=null, raf=0;
+  const key='dbh-admin-dashboard-tour-v2';
+  const mobile=()=>window.matchMedia('(max-width:800px)').matches;
+  function sidebarOpen(){return $('dbhAdminSidebar')?.classList.contains('open')}
+  function ensureSidebarFor(el){
+    if(el?.closest('#dbhAdminSidebar')&&mobile()&&!sidebarOpen()) $('adminMenu')?.click();
   }
-  function openTour(){index=0;render();overlay.classList.add('open');document.body.style.overflow='hidden';next.focus()}
-  function closeTour(){overlay.classList.remove('open');document.body.style.overflow='';try{localStorage.setItem(storageKey,'done')}catch(e){}}
-  $('dbhTourLauncher')?.addEventListener('click',openTour);
-  next.addEventListener('click',()=>{if(index<steps.length-1){index++;render()}else closeTour()});
-  back.addEventListener('click',()=>{if(index>0){index--;render()}});
-  skip.addEventListener('click',closeTour);
-  overlay.addEventListener('click',e=>{if(e.target===overlay)closeTour()});
-  document.addEventListener('keydown',e=>{if(!overlay.classList.contains('open'))return;if(e.key==='Escape')closeTour();if(e.key==='ArrowRight'&&index<steps.length-1){index++;render()}if(e.key==='ArrowLeft'&&index>0){index--;render()}});
-  render();
-  let seen=false;try{seen=localStorage.getItem(storageKey)==='done'}catch(e){}
-  if(!seen)window.setTimeout(openTour,650);
+  function findTarget(step){
+    try{return document.querySelector(step.selector)}catch(e){return null}
+  }
+  function place(){
+    if(!target||!tooltip.classList.contains('show'))return;
+    const r=target.getBoundingClientRect();
+    if(r.width===0||r.height===0)return;
+    const pad=7, vw=window.innerWidth, vh=window.innerHeight;
+    const sx=Math.max(5,r.left-pad), sy=Math.max(5,r.top-pad);
+    spotlight.style.left=sx+'px';spotlight.style.top=sy+'px';
+    spotlight.style.width=Math.min(vw-sx-5,r.width+pad*2)+'px';
+    spotlight.style.height=Math.min(vh-sy-5,r.height+pad*2)+'px';
+    spotlight.classList.add('show');
+    const tw=Math.min(360,vw-24), th=tooltip.offsetHeight||250;
+    let left=Math.max(12,Math.min(vw-tw-12,r.left+(r.width/2)-(tw/2)));
+    let top=r.bottom+pad+13; tooltip.classList.remove('arrow-bottom');
+    if(top+th>vh-12){top=r.top-th-pad-13;tooltip.classList.add('arrow-bottom')}
+    if(top<10){top=Math.max(10,Math.min(vh-th-10,(vh-th)/2));}
+    tooltip.style.left=left+'px';tooltip.style.top=top+'px';
+    const arrowTop = r.top > vh*.55 ? r.top-29 : r.bottom+8;
+    arrow.style.left=Math.max(6,Math.min(vw-35,r.left+r.width/2-13))+'px';
+    arrow.style.top=Math.max(5,Math.min(vh-35,arrowTop))+'px';
+    arrow.innerHTML=r.top>vh*.55?'<i class="fa-solid fa-arrow-up"></i>':'<i class="fa-solid fa-arrow-down"></i>';
+    arrow.classList.add('show');
+  }
+  function clearTarget(){document.querySelectorAll('.dbh-tour-target-active').forEach(el=>el.classList.remove('dbh-tour-target-active'));target=null}
+  function showStep(){
+    clearTarget();
+    const step=steps[index];
+    title.textContent=step.title;body.textContent=step.text;tip.textContent=step.tip;
+    count.textContent=(index+1)+' / '+steps.length;
+    fill.style.width=((index+1)/steps.length*100)+'%';
+    back.disabled=index===0;
+    next.innerHTML=index===steps.length-1?'Finish <i class="fa-solid fa-check"></i>':'Next <i class="fa-solid fa-arrow-right"></i>';
+    let el=findTarget(step);
+    if(!el && step.selector.includes('.admin-nav-link')) {
+      const href=step.selector.match(/href="([^"]+)"/)?.[1];
+      if(href)el=[...document.querySelectorAll('.admin-nav-link')].find(a=>a.getAttribute('href')===href);
+    }
+    if(!el){title.textContent=step.title;body.textContent=step.text;tip.textContent=step.tip+' This control is not present on this page yet.';spotlight.classList.remove('show');arrow.classList.remove('show');target=null;tooltip.classList.add('show');place();return}
+    ensureSidebarFor(el);
+    target=el;
+    const scroller=el.closest('.admin-side-scroll');
+    if(scroller){
+      const sr=scroller.getBoundingClientRect(), er=el.getBoundingClientRect();
+      if(er.top<sr.top+8||er.bottom>sr.bottom-8)el.scrollIntoView({block:'center',behavior:'smooth'});
+    } else if(el.getBoundingClientRect().top<12||el.getBoundingClientRect().bottom>window.innerHeight-12){
+      el.scrollIntoView({block:'center',behavior:'smooth'});
+    }
+    el.classList.add('dbh-tour-target-active');
+    tooltip.classList.add('show');
+    window.setTimeout(place,80);window.setTimeout(place,280);window.setTimeout(place,500);
+  }
+  function start(){index=0;tooltip.classList.add('show');showStep();place();next.focus()}
+  function finish(){tooltip.classList.remove('show');spotlight.classList.remove('show');arrow.classList.remove('show');clearTarget();try{localStorage.setItem(key,'done')}catch(e){}}
+  next.addEventListener('click',()=>{if(index<steps.length-1){index++;showStep()}else finish()});
+  back.addEventListener('click',()=>{if(index>0){index--;showStep()}});
+  skip.addEventListener('click',finish);
+  $('dbhTourLauncher')?.addEventListener('click',start);
+  window.addEventListener('resize',()=>{if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(place)});
+  window.addEventListener('scroll',()=>{if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(place)},true);
+  $('dbhAdminSidebar')?.addEventListener('scroll',()=>{if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(place)},true);
+  document.addEventListener('keydown',e=>{if(!tooltip.classList.contains('show'))return;if(e.key==='Escape')finish();if(e.key==='ArrowRight')next.click();if(e.key==='ArrowLeft')back.click()});
+  let seen=false;try{seen=localStorage.getItem(key)==='done'}catch(e){}
+  if(!seen)window.setTimeout(start,900);
 })();
 </script>
 </body></html>
