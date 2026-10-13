@@ -27,11 +27,14 @@
   try{let q=S.from('profiles').select('id,full_name,email,role,is_active,created_at',{count:'exact'}).eq('role','customer').order('created_at',{ascending:false,nullsFirst:false});
    if(status==='active')q=q.eq('is_active',true);else if(status==='inactive')q=q.eq('is_active',false);
    if(term)q=q.or('full_name.ilike.%'+term+'%,email.ilike.%'+term+'%');
-   const from=page*PAGE_SIZE,res=await q.range(from,from+PAGE_SIZE-1);if(mine!==requestId)return;if(res.error)throw res.error;
-   const rows=res.data||[];total=res.count==null?rows.length:res.count;
+   const from=page*PAGE_SIZE;
+   const countFor=async function(active){let cq=S.from('profiles').select('id',{count:'exact',head:true}).eq('role','customer').eq('is_active',active);if(term)cq=cq.or('full_name.ilike.%'+term+'%,email.ilike.%'+term+'%');return cq};
+   const results=await Promise.all([q.range(from,from+PAGE_SIZE-1),countFor(true),countFor(false)]);
+   if(mine!==requestId)return;if(results[0].error)throw results[0].error;
+   const rows=results[0].data||[];total=results[0].count==null?rows.length:results[0].count;
    $('totalCount').textContent=total.toLocaleString();
-   $('activeCount').textContent=status==='inactive'?'0':(status==='active'?total:'—');
-   $('inactiveCount').textContent=status==='active'?'0':(status==='inactive'?total:'—');
+   $('activeCount').textContent=results[1].error?'—':(results[1].count||0).toLocaleString();
+   $('inactiveCount').textContent=results[2].error?'—':(results[2].count||0).toLocaleString();
    $('resultsLabel').textContent=(term||status!=='all')?'Filtered customer results':'Registered customer accounts';
    renderRows(rows);updatePager(from,Math.min(from+rows.length,total));
   }catch(e){if(mine!==requestId)return;$('customerRows').innerHTML='<tr><td colspan="4"><div class="empty"><i class="fa-solid fa-triangle-exclamation"></i><b>Could not load customer records</b><p>Check your connection and admin access, then refresh.</p></div></td></tr>';$('totalCount').textContent='—';$('activeCount').textContent='—';$('inactiveCount').textContent='—';errorShow('Customer records could not be loaded. '+(e&&e.message?e.message:'Please try again.'));$('resultsLabel').textContent='Unable to fetch customer accounts';updatePager(0,0)}
