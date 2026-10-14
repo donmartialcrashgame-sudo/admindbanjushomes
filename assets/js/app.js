@@ -46,6 +46,14 @@
         <div><strong>DBH ADMIN</strong><small>D BANJUS HOMES NIG LTD</small></div>
         <button type="button" class="admin-side-close" id="adminSideClose" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
       </div>
+      <div class="admin-side-quickbar" aria-label="Admin shortcuts">
+        <a class="admin-quick-action" href="notifications.html" title="Open notifications" aria-label="Open notifications">
+          <i class="fa-solid fa-bell"></i><span>Notifications</span><span class="admin-quick-dot" aria-hidden="true"></span>
+        </a>
+        <a class="admin-quick-action admin-profile-shortcut" href="agents.html" title="Open agent profiles" aria-label="Open agent profiles">
+          <i class="fa-solid fa-user-tie"></i><span>Agent profiles</span><i class="fa-solid fa-arrow-up-right-from-square admin-shortcut-arrow"></i>
+        </a>
+      </div>
       <div class="admin-side-scroll">
         <nav aria-label="Admin navigation">${groups.map((g,gi)=>`
           <section class="admin-nav-group">
@@ -103,12 +111,27 @@
       .admin-brand strong{display:block;color:#062b52;font-size:13px;letter-spacing:.04em}
       .admin-brand small{display:block;color:#7890a9;font-size:8px;letter-spacing:.1em;margin-top:4px}
       .admin-side-close{display:none;margin-left:auto;border:0;background:#eef5ff;color:#1d5fb8;border-radius:10px;padding:8px}
+      .admin-side-quickbar{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 2px 12px;margin:0 0 2px;border-bottom:1px solid #e8eff7}
+      .admin-quick-action{position:relative;min-width:0;display:flex;align-items:center;gap:7px;padding:10px 9px;border:1px solid #e3edf8;border-radius:12px;background:linear-gradient(145deg,#f8fbff,#edf5ff);color:#315f98!important;text-decoration:none!important;font-size:10px;font-weight:850;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease,background .22s ease}
+      .admin-quick-action>i:first-child{display:inline-flex;align-items:center;justify-content:center;flex:0 0 25px;width:25px;height:25px;border-radius:9px;background:#dcecff;color:#2476d2;font-size:13px;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .2s,color .2s}
+      .admin-quick-action:first-child>i:first-child{color:#d94675;background:#ffe4ed}
+      .admin-quick-action span:nth-child(2){white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .admin-quick-action:hover{transform:translateY(-2px);border-color:#a8cef8;box-shadow:0 8px 18px #2468a51c;background:#fff}
+      .admin-quick-action:hover>i:first-child{transform:rotate(-10deg) scale(1.12);background:#cbe3ff;color:#075fc0}
+      .admin-quick-action:first-child:hover>i:first-child{background:#ffd2e1;color:#be185d;animation:dbhBellWiggle .55s ease}
+      .admin-quick-action:active{transform:scale(.97)}
+      .admin-quick-action:focus-visible,.admin-nav-link:focus-visible{outline:3px solid #82baff;outline-offset:2px}
+      .admin-quick-dot{position:absolute;top:8px;left:27px;width:7px;height:7px;border-radius:50%;background:#ef4444;border:2px solid #fff;animation:dbhDotPulse 1.7s infinite}
+      .admin-shortcut-arrow{margin-left:auto;color:#8aa3bf;font-size:9px;transition:transform .2s}
+      .admin-quick-action:hover .admin-shortcut-arrow{transform:translate(2px,-2px)}
+      @keyframes dbhBellWiggle{0%,100%{transform:rotate(0) scale(1.12)}25%{transform:rotate(14deg) scale(1.12)}60%{transform:rotate(-12deg) scale(1.12)}}
+      @keyframes dbhDotPulse{0%,100%{box-shadow:0 0 0 0 #ef444455}50%{box-shadow:0 0 0 5px #ef444400}}
       .admin-side-scroll{overflow-y:auto;overflow-x:hidden;flex:1;padding:2px 1px 10px;scrollbar-width:thin}
       .admin-nav-group{margin:11px 0 15px}
       .admin-nav-heading{padding:0 11px 7px;font-size:9px;font-weight:950;letter-spacing:.15em;color:#91a1b5}
       .admin-side nav{display:grid;gap:4px}
       .admin-nav-link{position:relative;display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:11px;text-decoration:none!important;color:#52657b!important;font-size:11px;font-weight:800;line-height:1.25;transition:background .2s,color .2s,transform .2s}
-      .admin-nav-link i{width:18px;text-align:center;font-size:14px;color:#7b91aa;transition:color .2s,transform .2s}.admin-nav-link:hover i{transform:scale(1.12)}.admin-nav-link:nth-of-type(1) i{color:#4f7ee8}.admin-nav-link:nth-of-type(2) i{color:#0e9f9a}.admin-nav-link:nth-of-type(3) i{color:#9b62d9}.admin-nav-link:nth-of-type(4) i{color:#d97706}.admin-nav-link:nth-of-type(5) i{color:#e05d78}.admin-nav-link:nth-of-type(6) i{color:#14a06f}.admin-nav-link:nth-of-type(7) i{color:#7c6ee6}.admin-nav-link:nth-of-type(8) i{color:#0e9db8}.admin-nav-link:nth-of-type(9) i{color:#c07836}.admin-nav-link:nth-of-type(10) i{color:#0d9488}.admin-nav-link:nth-of-type(11) i{color:#d97706}.admin-nav-link:nth-of-type(12) i{color:#22a06b}.admin-nav-link:nth-of-type(13) i{color:#5b76d6}.admin-nav-link:nth-of-type(14) i{color:#e05d78}.admin-nav-link:nth-of-type(15) i{color:#0d9488}.admin-nav-link:nth-of-type(16) i{color:#7c6ee6}.admin-nav-link:nth-of-type(17) i{color:#d97706}.admin-nav-link:nth-of-type(18) i{color:#0e9db8}.admin-nav-badge{margin-left:auto;min-width:21px;height:21px;padding:0 6px;border-radius:999px;background:#e11d48;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:950;box-shadow:0 0 0 3px #ffe4eb;animation:dbhBadgePulse 1.8s infinite}.admin-nav-badge[hidden]{display:none}@keyframes dbhBadgePulse{0%,100%{box-shadow:0 0 0 3px #ffe4eb}50%{box-shadow:0 0 0 6px #ffe4ebaa}}
+      .admin-nav-link i{width:18px;text-align:center;font-size:14px;color:#7b91aa;transition:color .2s,transform .25s cubic-bezier(.2,.8,.2,1),filter .25s}.admin-nav-link:hover i{transform:translateY(-2px) scale(1.2) rotate(-5deg);filter:drop-shadow(0 3px 3px #2367a833)}.admin-nav-link.active i{animation:dbhIconArrive .35s ease-out}@keyframes dbhIconArrive{0%{transform:scale(.72) rotate(-12deg)}70%{transform:scale(1.18) rotate(4deg)}100%{transform:scale(1) rotate(0)}}.admin-nav-link:hover{box-shadow:0 5px 13px #1c5c9510}.admin-nav-link:nth-of-type(1) i{color:#4f7ee8}.admin-nav-link:nth-of-type(2) i{color:#0e9f9a}.admin-nav-link:nth-of-type(3) i{color:#9b62d9}.admin-nav-link:nth-of-type(4) i{color:#d97706}.admin-nav-link:nth-of-type(5) i{color:#e05d78}.admin-nav-link:nth-of-type(6) i{color:#14a06f}.admin-nav-link:nth-of-type(7) i{color:#7c6ee6}.admin-nav-link:nth-of-type(8) i{color:#0e9db8}.admin-nav-link:nth-of-type(9) i{color:#c07836}.admin-nav-link:nth-of-type(10) i{color:#0d9488}.admin-nav-link:nth-of-type(11) i{color:#d97706}.admin-nav-link:nth-of-type(12) i{color:#22a06b}.admin-nav-link:nth-of-type(13) i{color:#5b76d6}.admin-nav-link:nth-of-type(14) i{color:#e05d78}.admin-nav-link:nth-of-type(15) i{color:#0d9488}.admin-nav-link:nth-of-type(16) i{color:#7c6ee6}.admin-nav-link:nth-of-type(17) i{color:#d97706}.admin-nav-link:nth-of-type(18) i{color:#0e9db8}.admin-nav-badge{margin-left:auto;min-width:21px;height:21px;padding:0 6px;border-radius:999px;background:#e11d48;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:950;box-shadow:0 0 0 3px #ffe4eb;animation:dbhBadgePulse 1.8s infinite}.admin-nav-badge[hidden]{display:none}@keyframes dbhBadgePulse{0%,100%{box-shadow:0 0 0 3px #ffe4eb}50%{box-shadow:0 0 0 6px #ffe4ebaa}}
       .admin-nav-link:hover{background:#f0f7ff;color:#0868cb!important;transform:translateX(2px)}
       .admin-nav-link.active{background:linear-gradient(115deg,#e8f3ff,#f1f8ff);color:#076bd1!important;box-shadow:inset 3px 0 #0876df}
       .admin-nav-link.active i{color:#0876df}
