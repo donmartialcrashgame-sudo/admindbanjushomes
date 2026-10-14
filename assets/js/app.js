@@ -119,6 +119,20 @@
       .admin-logout{width:100%;border:0;background:transparent;text-decoration:none;color:#c73545;display:flex;align-items:center;gap:11px;padding:11px;border-radius:11px;font-weight:850;font-size:11px;text-align:left;cursor:pointer}
       .admin-logout i{width:18px;text-align:center}.admin-logout:hover{background:#fff1f2}
       .admin-sidebar-overlay{display:none}
+      /* Consistent semantic icon colours across the admin portal */
+      .admin-main .fa-circle-check,.admin-main .fa-check-circle,.admin-main .fa-shield-check,.admin-main .fa-badge-check,.admin-main .fa-circle-check{color:#15945b}
+      .admin-main .fa-triangle-exclamation,.admin-main .fa-circle-exclamation,.admin-main .fa-circle-info,.admin-main .fa-shield-halved{color:#15945b}
+      .admin-main .fa-xmark,.admin-main .fa-circle-xmark,.admin-main .fa-ban,.admin-main .fa-trash,.admin-main .fa-circle-minus{color:#dc3545}
+      .admin-main .fa-hourglass-half,.admin-main .fa-clock,.admin-main .fa-file-circle-question{color:#d97706}
+      .admin-main .fa-house,.admin-main .fa-house-chimney,.admin-main .fa-building,.admin-main .fa-image,.admin-main .fa-images{color:#2778d4}
+      .admin-main .fa-user,.admin-main .fa-users,.admin-main .fa-user-tie,.admin-main .fa-user-shield{color:#8b5bd6}
+      .admin-main .fa-wallet,.admin-main .fa-credit-card,.admin-main .fa-money-bill-wave,.admin-main .fa-receipt{color:#0d9488}
+      .admin-main .fa-bell,.admin-main .fa-message,.admin-main .fa-comments,.admin-main .fa-envelope{color:#db5b7a}
+      .admin-main .fa-file,.admin-main .fa-file-lines,.admin-main .fa-file-shield,.admin-main .fa-folder-open{color:#7c6ee6}
+      .admin-main .fa-filter,.admin-main .fa-magnifying-glass,.admin-main .fa-rotate-right,.admin-main .fa-gear,.admin-main .fa-sliders{color:#3279ca}
+      .admin-main .note,.admin-main .warning,.admin-main .alert-warning{background:#eaf9f0!important;border-color:#b9e8cb!important;color:#176b42!important}
+      .admin-main .note i,.admin-main .warning i,.admin-main .alert-warning i{color:#15945b!important}
+      .admin-main .admin-security-note{background:#eaf9f0!important;color:#176b42!important}
       .admin-main{margin-left:265px!important}
       body:has(.admin-side) .admin-main{min-width:0}
       @media(max-width:800px){
