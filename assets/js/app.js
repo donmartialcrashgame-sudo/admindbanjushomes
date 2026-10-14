@@ -21,7 +21,7 @@
     ]},
     {title:'PROPERTY MANAGEMENT',items:[
       ['properties.html','All Properties','house-chimney'],
-      ['property-approvals.html','Pending Approvals','clipboard-check'],
+      ['property-approvals.html','Pending Approvals','clipboard-check','property-pending'],
       ['documents.html','Property Documents','file-shield']
     ]},
     {title:'PLATFORM',items:[
@@ -50,7 +50,7 @@
         <nav aria-label="Admin navigation">${groups.map((g,gi)=>`
           <section class="admin-nav-group">
             <div class="admin-nav-heading">${g.title}</div>
-            ${g.items.map(a=>`<a href="${esc(a[0])}" class="admin-nav-link ${current===a[0]?'active':''}" ${current===a[0]?'aria-current="page"':''}><i class="fa-solid fa-${esc(a[2])}"></i><span>${esc(a[1])}</span></a>`).join('')}
+            ${g.items.map(a=>`<a href="${esc(a[0])}" class="admin-nav-link ${current===a[0]?'active':''}" ${current===a[0]?'aria-current="page"':''}><i class="fa-solid fa-${esc(a[2])}"></i><span>${esc(a[1])}</span>${a[3]?`<span class="admin-nav-badge" id="propertyPendingBadge" aria-label="New property submissions" hidden>0</span>`:""}</a>`).join('')}
           </section>`).join('')}
         </nav>
       </div>
@@ -62,6 +62,26 @@
       try{if(S)await S.auth.signOut()}finally{location.href='login.html'}
     });
     document.getElementById('adminSideClose')?.addEventListener('click',()=>closeSidebar());
+  }
+  let pendingPoll=null,pendingChannel=null,lastPendingCount=null;
+  async function refreshPendingBadge(){
+    const badge=document.getElementById('propertyPendingBadge');
+    if(!badge||!S)return;
+    try{
+      const r=await S.from('properties').select('id,verification_status,is_verified,is_published').eq('is_published',false).limit(1000);
+      if(r.error)throw r.error;
+      const count=(r.data||[]).filter(p=>p.is_verified!==true&&!['verified','approved','rejected'].includes(String(p.verification_status||'').toLowerCase())).length;
+      badge.textContent=count>99?'99+':String(count);badge.hidden=count===0;
+      badge.setAttribute('aria-label',count+' properties awaiting review');badge.title=count+' property submission'+(count===1?'':'s')+' awaiting review';
+      if(lastPendingCount!==null&&count>lastPendingCount){badge.classList.remove('badge-new');void badge.offsetWidth;badge.classList.add('badge-new');}
+      lastPendingCount=count;
+    }catch(e){/* Keep navigation usable if row-level security blocks the count. */}
+  }
+  function startPendingBadge(){
+    refreshPendingBadge();if(pendingPoll)clearInterval(pendingPoll);
+    pendingPoll=setInterval(()=>{if(document.visibilityState!=='hidden')refreshPendingBadge()},20000);
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='hidden')refreshPendingBadge()});
+    try{if(S&&S.channel)pendingChannel=S.channel('dbh-admin-property-submissions').on('postgres_changes',{event:'*',schema:'public',table:'properties'},()=>refreshPendingBadge()).subscribe()}catch(e){}
   }
   function openSidebar(){
     document.getElementById('dbhAdminSidebar')?.classList.add('open');
@@ -88,7 +108,7 @@
       .admin-nav-heading{padding:0 11px 7px;font-size:9px;font-weight:950;letter-spacing:.15em;color:#91a1b5}
       .admin-side nav{display:grid;gap:4px}
       .admin-nav-link{position:relative;display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:11px;text-decoration:none!important;color:#52657b!important;font-size:11px;font-weight:800;line-height:1.25;transition:background .2s,color .2s,transform .2s}
-      .admin-nav-link i{width:18px;text-align:center;font-size:14px;color:#7b91aa}
+      .admin-nav-link i{width:18px;text-align:center;font-size:14px;color:#7b91aa;transition:color .2s,transform .2s}.admin-nav-link:hover i{transform:scale(1.12)}.admin-nav-link:nth-of-type(1) i{color:#4f7ee8}.admin-nav-link:nth-of-type(2) i{color:#0e9f9a}.admin-nav-link:nth-of-type(3) i{color:#9b62d9}.admin-nav-link:nth-of-type(4) i{color:#d97706}.admin-nav-link:nth-of-type(5) i{color:#e05d78}.admin-nav-link:nth-of-type(6) i{color:#14a06f}.admin-nav-link:nth-of-type(7) i{color:#7c6ee6}.admin-nav-link:nth-of-type(8) i{color:#0e9db8}.admin-nav-link:nth-of-type(9) i{color:#c07836}.admin-nav-link:nth-of-type(10) i{color:#0d9488}.admin-nav-link:nth-of-type(11) i{color:#d97706}.admin-nav-link:nth-of-type(12) i{color:#22a06b}.admin-nav-link:nth-of-type(13) i{color:#5b76d6}.admin-nav-link:nth-of-type(14) i{color:#e05d78}.admin-nav-link:nth-of-type(15) i{color:#0d9488}.admin-nav-link:nth-of-type(16) i{color:#7c6ee6}.admin-nav-link:nth-of-type(17) i{color:#d97706}.admin-nav-link:nth-of-type(18) i{color:#0e9db8}.admin-nav-badge{margin-left:auto;min-width:21px;height:21px;padding:0 6px;border-radius:999px;background:#e11d48;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:950;box-shadow:0 0 0 3px #ffe4eb;animation:dbhBadgePulse 1.8s infinite}.admin-nav-badge[hidden]{display:none}@keyframes dbhBadgePulse{0%,100%{box-shadow:0 0 0 3px #ffe4eb}50%{box-shadow:0 0 0 6px #ffe4ebaa}}
       .admin-nav-link:hover{background:#f0f7ff;color:#0868cb!important;transform:translateX(2px)}
       .admin-nav-link.active{background:linear-gradient(115deg,#e8f3ff,#f1f8ff);color:#076bd1!important;box-shadow:inset 3px 0 #0876df}
       .admin-nav-link.active i{color:#0876df}
@@ -126,7 +146,7 @@
     return session;
   }
   document.addEventListener('DOMContentLoaded',async()=>{
-    ensureStyles();renderSidebar();
+    ensureStyles();renderSidebar();startPendingBadge();
     document.getElementById('adminMenu')?.addEventListener('click',openSidebar);
     window.addEventListener('resize',()=>{if(window.innerWidth>800)closeSidebar()});
     await auth();
