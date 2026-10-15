@@ -27,6 +27,7 @@
     {title:'PLATFORM',items:[
       ['payments.html','Payments & Receipts','credit-card'],
       ['notifications.html','Notifications','bell'],
+      ['email-templates.html','Email Templates','envelope-open-text'],
       ['messages.html','Customer Care & Messages','message'],
       ['reports.html','Reports & Analytics','chart-pie'],
       ['admin-staff.html','Admin Staff','user-shield'],
