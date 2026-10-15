@@ -10,8 +10,8 @@
  <div class="panel-body">
   <div class="mini-stats">
    <div class="mini-stat"><span>FLUTTERWAVE AVAILABLE BALANCE</span><strong id="personalFlwBalance">Checking…</strong><span class="muted" id="personalFlwStatus">Connecting securely</span></div>
-   <div class="mini-stat"><span>ACCOUNT HOLDER</span><strong id="personalFlwName">AirPay.com</strong><span class="muted">Your personal Flutterwave account</span></div>
-   <div class="mini-stat"><span>BANK</span><strong id="personalFlwBank">Flutterwave MFB</strong><span class="muted">Account number ending <span id="personalFlwLast4">••••</span></span></div>
+   <div class="mini-stat"><span>ACCOUNT HOLDER / NARRATION</span><strong id="personalFlwName">Loading from Flutterwave…</strong><span class="muted">Returned by Flutterwave API when available</span></div>
+   <div class="mini-stat"><span>BANK ACCOUNT DETAILS</span><strong id="personalFlwBank">Loading from Flutterwave…</strong><span class="muted">Account number: <span id="personalFlwAccountNumber">Loading…</span></span></div>
   </div>
   <div class="notice" id="personalFlwNotice"><i class="fa-solid fa-shield-halved"></i><span>The Flutterwave balance is retrieved from the server. Your DBH wallet balances and transaction history below remain separate.</span></div>
  </div>
@@ -61,10 +61,17 @@ async function loadPersonalFlutterwaveBalance(){
   if(!data?.ok||!Number.isFinite(Number(data.balance)))throw new Error(data?.error||'Flutterwave did not return a valid balance.');
   balance.textContent=new Intl.NumberFormat('en-NG',{style:'currency',currency:data.currency||'NGN',maximumFractionDigits:2}).format(Number(data.balance));
   status.textContent='Live balance · checked '+new Date(data.as_of||Date.now()).toLocaleTimeString();
-  $('personalFlwName').textContent=data.account_name||'AirPay.com';
-  $('personalFlwBank').textContent=data.bank_name||'Flutterwave MFB';
-  $('personalFlwLast4').textContent=data.account_last4||'••••';
-  noticeEl.className='notice';noticeEl.innerHTML='<i class="fa-solid fa-shield-halved"></i><span>Live balance received securely from Flutterwave. This amount is not added to customer or agent wallet balances.</span>';
+  const account=data.account||null;
+  $('personalFlwName').textContent=account?.account_name||'Not provided by Flutterwave';
+  $('personalFlwBank').textContent=account?.bank_name||'Not returned by Flutterwave';
+  $('personalFlwAccountNumber').textContent=account?.account_number||'Not returned by Flutterwave';
+  if(data.account_error){
+   noticeEl.className='notice error';
+   noticeEl.innerHTML='<i class="fa-solid fa-triangle-exclamation"></i><span>'+esc(data.account_error)+' The live balance was retrieved successfully; bank details are not hardcoded.</span>';
+  }else{
+   noticeEl.className='notice';
+   noticeEl.innerHTML='<i class="fa-solid fa-shield-halved"></i><span>Live balance and account details were retrieved securely from Flutterwave. These values are not added to customer or agent wallet balances.</span>';
+  }
  }catch(e){
   balance.textContent='Unavailable';status.textContent='Balance not connected';
   noticeEl.className='notice error';noticeEl.innerHTML='<i class="fa-solid fa-triangle-exclamation"></i><span>'+esc(e?.message||'Could not retrieve your Flutterwave balance.')+'</span>';
