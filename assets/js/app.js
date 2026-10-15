@@ -194,11 +194,15 @@
     return session;
   }
   window.addEventListener('dbh-sidebar-settings-changed',()=>{renderSidebar();refreshPendingBadge()});
-  document.addEventListener('DOMContentLoaded',async()=>{
+  let shellStarted=false;
+  async function startAdminShell(){
+    if(shellStarted)return;shellStarted=true;
     ensureStyles();renderSidebar();startPendingBadge();
     document.getElementById('adminMenu')?.addEventListener('click',openSidebar);
     window.addEventListener('resize',()=>{if(window.innerWidth>800)closeSidebar()});
     await auth();
     window.dispatchEvent(new CustomEvent('dbh-admin-ready',{detail:window.DBHAdminApp}));
-  });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',startAdminShell,{once:true});
+  else startAdminShell();
 })();
