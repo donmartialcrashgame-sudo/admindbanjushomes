@@ -42,8 +42,8 @@
     let cfg={};try{cfg=JSON.parse(localStorage.getItem('dbhSidebarCustomizations')||'{}')||{}}catch(e){}
     const labels=cfg.labels||{},hidden=cfg.hidden||{},orders=cfg.orders||{},groupTitles=cfg.groupTitles||{};
     base.forEach(g=>{g.title=groupTitles[g.title]||g.title;g.items=g.items.filter(a=>!hidden[a.href]).map(a=>({...a,label:labels[a.href]||a.label})).sort((a,b)=>(orders[a.href]??9999)-(orders[b.href]??9999));});
-    const custom=(Array.isArray(cfg.custom)?cfg.custom:[]).filter(a=>a&&typeof a.href==='string'&&typeof a.label==='string'&&(/^(https:\/\/|[a-zA-Z0-9_-]+\.html(?:[?#].*)?)$/.test(a.href))).map(a=>({href:a.href,label:a.label,icon:'link',badge:''}));
-    if(custom.length)base.push({title:groupTitles['CUSTOM LINKS']||'CUSTOM LINKS',items:custom});
+    const custom=(Array.isArray(cfg.custom)?cfg.custom:[]).filter(a=>a&&typeof a.href==='string'&&typeof a.label==='string'&&(/^(https:\\/\\/|[a-zA-Z0-9_-]+\\.html(?:[?#].*)?)$/.test(a.href))).map(a=>({href:a.href,label:a.label,icon:a.icon||'link',badge:'',category:a.category||'CUSTOM LINKS'}));
+    custom.forEach(a=>{let group=base.find(g=>g.title.toLowerCase()===String(a.category).toLowerCase());if(!group){group={title:a.category,items:[]};base.push(group)}if(!group.items.some(x=>x.href===a.href))group.items.push(a)});
     return base;
   }
   function renderSidebar(){
