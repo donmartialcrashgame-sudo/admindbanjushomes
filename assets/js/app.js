@@ -48,7 +48,7 @@
     const staff=window.DBHAdminApp?.staff||null;
     const role=String(staff?.role||'').toLowerCase();
     const pageRules=staff?.permissions?.pages;
-    const hasRules=pageRules&&typeof pageRules==='object'&&Object.keys(pageRules).length>0;
+    const isFullAccess=['admin','super_admin'].includes(role);
     const pageKey=(href)=>{
       const key=String(href||'').replace(/\.html(?:[?#].*)?$/i,'').replace(/^.*\//,'')||'index';
       const aliases={
@@ -57,15 +57,14 @@
         'customer-messages':'customer-care','messages':'messages',
         'agents':'agents','agent-applications':'agents','agent-documents':'documents',
         'agent-payments':'payments','agent-listings':'properties',
-        'property-approvals':'properties','property-approvals':'properties',
-        'email-templates':'settings','tools':'settings'
+        'property-approvals':'properties','email-templates':'settings','tools':'settings'
       };
       return aliases[key]||key;
     };
     const canView=(href)=>{
-      if(!hasRules||['admin','super_admin'].includes(role))return true;
-      const key=pageKey(href);
-      return pageRules[key]?.view===true;
+      if(isFullAccess)return true;
+      if(!pageRules||typeof pageRules!=='object')return false;
+      return pageRules[pageKey(href)]?.view===true;
     };
     return base.map(g=>({...g,items:g.items.filter(a=>canView(a.href))})).filter(g=>g.items.length);
   }
@@ -80,13 +79,9 @@
         <div><strong>DBH ADMIN</strong><small>D BANJUS HOMES NIG LTD</small></div>
         <button type="button" class="admin-side-close" id="adminSideClose" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="admin-side-quickbar" aria-label="Admin shortcuts">
-        <a class="admin-quick-action" href="notifications.html" title="Open notifications" aria-label="Open notifications">
-          <i class="fa-solid fa-bell"></i><span>Notifications</span><span class="admin-quick-dot" aria-hidden="true"></span>
-        </a>
-        <a class="admin-quick-action admin-profile-shortcut" href="agents.html" title="Open agent profiles" aria-label="Open agent profiles">
-          <i class="fa-solid fa-user-tie"></i><span>Agent profiles</span><i class="fa-solid fa-arrow-up-right-from-square admin-shortcut-arrow"></i>
-        </a>
+      <div class="admin-side-identity" id="adminSideIdentity">
+        <span class="admin-avatar"><i class="fa-solid fa-user-shield"></i></span>
+        <span class="admin-identity-copy"><b>${esc(window.DBHAdminApp?.staff?.full_name||window.DBHAdminApp?.profile?.full_name||window.DBHAdminApp?.staff?.email||window.DBHAdminApp?.profile?.email||'Signed-in staff')}</b><small>${esc(String(window.DBHAdminApp?.staff?.role||window.DBHAdminApp?.profile?.role||'staff').replace(/_/g,' ').toUpperCase())} · SIGNED IN</small></span>
       </div>
       <div class="admin-side-scroll">
         <nav aria-label="Admin navigation">${getNavGroups().map((g,gi)=>`
@@ -145,7 +140,7 @@
       .admin-brand strong{display:block;color:#062b52;font-size:13px;letter-spacing:.04em}
       .admin-brand small{display:block;color:#7890a9;font-size:8px;letter-spacing:.1em;margin-top:4px}
       .admin-side-close{display:none;margin-left:auto;border:0;background:#eef5ff;color:#1d5fb8;border-radius:10px;padding:8px}
-      .admin-side-quickbar{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 2px 12px;margin:0 0 2px;border-bottom:1px solid #e8eff7}
+      .admin-side-identity{display:flex;align-items:center;gap:10px;padding:11px 9px;margin:0 2px 8px;border:1px solid #e3edf8;border-radius:13px;background:linear-gradient(145deg,#f8fbff,#edf5ff);min-width:0}\n      .admin-avatar{width:34px;height:34px;display:grid;place-items:center;flex:0 0 34px;border-radius:11px;background:#dcecff;color:#176bc2;font-size:15px}\n      .admin-identity-copy{display:block;min-width:0}.admin-identity-copy b{display:block;color:#163a60;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.admin-identity-copy small{display:block;color:#7188a1;font-size:8px;font-weight:900;letter-spacing:.07em;margin-top:4px}
       .admin-quick-action{position:relative;min-width:0;display:flex;align-items:center;gap:7px;padding:10px 9px;border:1px solid #e3edf8;border-radius:12px;background:linear-gradient(145deg,#f8fbff,#edf5ff);color:#315f98!important;text-decoration:none!important;font-size:10px;font-weight:850;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease,background .22s ease}
       .admin-quick-action>i:first-child{display:inline-flex;align-items:center;justify-content:center;flex:0 0 25px;width:25px;height:25px;border-radius:9px;background:#dcecff;color:#2476d2;font-size:13px;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .2s,color .2s}
       .admin-quick-action:first-child>i:first-child{color:#d94675;background:#ffe4ed}
@@ -211,14 +206,18 @@
     window.DBHAdminApp.session=session;
     try{
       const r=await S.functions.invoke('dbh-admin-staff',{body:{action:'access'}});
-      if(r.data?.ok){window.DBHAdminApp.profile=r.data.profile;window.DBHAdminApp.staff=r.data.staff;renderSidebar();
+      if(r.data?.ok){
+        window.DBHAdminApp.profile=r.data.profile;window.DBHAdminApp.staff=r.data.staff;
+        renderSidebar();
         const staff=window.DBHAdminApp.staff,role=String(staff?.role||'').toLowerCase(),rules=staff?.permissions?.pages;
         const rawKey=(location.pathname.split('/').pop()||'index.html').replace(/\.html(?:[?#].*)?$/i,'');
         const aliases={'dashboard':'index','users':'customers','customer-activity':'customers','saved-properties':'customers','customer-messages':'customer-care','agents':'agents','agent-applications':'agents','agent-documents':'documents','agent-payments':'payments','agent-listings':'properties','property-approvals':'properties','email-templates':'settings','tools':'settings'};
         const key=aliases[rawKey]||rawKey;
-        if(rules&&typeof rules==='object'&&Object.keys(rules).length&&!['admin','super_admin'].includes(role)&&rules[key]?.view!==true&&rawKey!=='login'){
-          document.body.innerHTML='<main style="font:16px system-ui;max-width:620px;margin:12vh auto;padding:28px;background:#fff;border:1px solid #dce8f4;border-radius:18px;color:#18334e"><h1 style="color:#052b55">Page access not granted</h1><p>Your DBH administrator has not granted access to this page. Contact your supervisor if you need it for your role.</p><a href="index.html">Return to dashboard</a></main>';return session;
+        const fullAccess=['admin','super_admin'].includes(role);
+        if(!fullAccess&&(!rules||rules[key]?.view!==true)&&rawKey!=='login'){
+          document.body.innerHTML='<main style="font:16px system-ui;max-width:620px;margin:12vh auto;padding:28px;background:#fff;border:1px solid #dce8f4;border-radius:18px;color:#18334e"><h1 style="color:#052b55">Page access not granted</h1><p>Your DBH administrator has not enabled this page for your account. Contact your supervisor if you need it.</p><a href="index.html">Return to dashboard</a></main>';return session;
         }
+        try{await S.functions.invoke('dbh-admin-staff',{body:{action:'touch'}})}catch(e){}
       } else document.body.classList.add('admin-auth-check-failed');
     }catch(e){document.body.classList.add('admin-auth-check-failed')}
     return session;
