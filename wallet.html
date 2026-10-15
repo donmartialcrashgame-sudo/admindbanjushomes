@@ -53,7 +53,11 @@ async function loadPersonalFlutterwaveBalance(){
   const {data:{session}}=await s.auth.getSession();
   if(!session?.access_token)throw new Error('Please sign in to DBH Admin again.');
   const {data,error}=await s.functions.invoke('dbh-admin-staff',{body:{action:'personal_flutterwave_balance'}});
-  if(error)throw error;
+  if(error){
+   let detail='';
+   try{const response=error.context;if(response&&typeof response.clone==='function'){const payload=await response.clone().json();detail=String(payload?.error||payload?.message||'')}}catch(e){}
+   throw new Error(detail||error.message||'The secure Flutterwave balance request failed. Check the Supabase Edge Function logs.');
+  }
   if(!data?.ok||!Number.isFinite(Number(data.balance)))throw new Error(data?.error||'Flutterwave did not return a valid balance.');
   balance.textContent=new Intl.NumberFormat('en-NG',{style:'currency',currency:data.currency||'NGN',maximumFractionDigits:2}).format(Number(data.balance));
   status.textContent='Live balance · checked '+new Date(data.as_of||Date.now()).toLocaleTimeString();
