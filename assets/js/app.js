@@ -26,6 +26,7 @@
     ]},
     {title:'PLATFORM',items:[
       ['payments.html','Payments & Receipts','credit-card'],
+      ['withdrawals.html','Withdrawals','money-bill-transfer'],
       ['wallet.html','Wallet Management','wallet'],
       ['notifications.html','Notifications','bell'],
       ['email-templates.html','Email Templates','envelope-open-text'],
