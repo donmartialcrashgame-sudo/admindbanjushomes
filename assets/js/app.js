@@ -26,6 +26,7 @@
     ]},
     {title:'PLATFORM',items:[
       ['payments.html','Payments & Receipts','credit-card'],
+      ['wallet.html','Wallet Management','wallet'],
       ['notifications.html','Notifications','bell'],
       ['email-templates.html','Email Templates','envelope-open-text'],
       ['messages.html','Customer Care & Messages','message'],
@@ -36,6 +37,15 @@
     ]}
   ];
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function getNavGroups(){
+    const base=groups.map(g=>({title:g.title,items:g.items.map(a=>({href:a[0],label:a[1],icon:a[2],badge:a[3]||''}))}));
+    let cfg={};try{cfg=JSON.parse(localStorage.getItem('dbhSidebarCustomizations')||'{}')||{}}catch(e){}
+    const labels=cfg.labels||{},hidden=cfg.hidden||{},orders=cfg.orders||{},groupTitles=cfg.groupTitles||{};
+    base.forEach(g=>{g.title=groupTitles[g.title]||g.title;g.items=g.items.filter(a=>!hidden[a.href]).map(a=>({...a,label:labels[a.href]||a.label})).sort((a,b)=>(orders[a.href]??9999)-(orders[b.href]??9999));});
+    const custom=(Array.isArray(cfg.custom)?cfg.custom:[]).filter(a=>a&&typeof a.href==='string'&&typeof a.label==='string'&&(/^(https:\/\/|[a-zA-Z0-9_-]+\.html(?:[?#].*)?)$/.test(a.href))).map(a=>({href:a.href,label:a.label,icon:'link',badge:''}));
+    if(custom.length)base.push({title:groupTitles['CUSTOM LINKS']||'CUSTOM LINKS',items:custom});
+    return base;
+  }
   function renderSidebar(){
     const mount=document.getElementById('dbhAdminSidebar');
     if(!mount)return;
@@ -56,7 +66,7 @@
         </a>
       </div>
       <div class="admin-side-scroll">
-        <nav aria-label="Admin navigation">${groups.map((g,gi)=>`
+        <nav aria-label="Admin navigation">${getNavGroups().map((g,gi)=>`
           <section class="admin-nav-group">
             <div class="admin-nav-heading">${g.title}</div>
             ${g.items.map(a=>`<a href="${esc(a[0])}" class="admin-nav-link ${current===a[0]?'active':''}" ${current===a[0]?'aria-current="page"':''}><i class="fa-solid fa-${esc(a[2])}"></i><span>${esc(a[1])}</span>${a[3]?`<span class="admin-nav-badge" id="propertyPendingBadge" aria-label="New property submissions" hidden>0</span>`:""}</a>`).join('')}
