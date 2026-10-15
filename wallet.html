@@ -8,8 +8,13 @@
 <section class="panel" id="personalWalletPanel" style="margin-bottom:16px">
  <div class="panel-head"><div><h2>My personal Flutterwave account</h2><p>Personal account balance, separate from DBH customer and agent wallet funds.</p></div><button class="btn primary" id="refreshPersonalFlutterwave" type="button"><i class="fa-solid fa-rotate"></i> Refresh balance</button></div>
  <div class="panel-body">
+  <div class="filters" style="grid-template-columns:minmax(220px,1fr) auto;margin-bottom:14px">
+   <input id="personalFlwOrderRef" type="text" autocomplete="off" spellcheck="false" aria-label="Virtual account order reference" placeholder="Virtual account order reference (URF_…)">
+   <button class="btn" id="fetchPersonalVirtualAccount" type="button"><i class="fa-solid fa-building-columns"></i> Fetch account details</button>
+  </div>
+  <p class="section-note">Enter the reference returned when the account was created. It is sent securely for this request only and is not saved on this page.</p>
   <div class="mini-stats">
-   <div class="mini-stat"><span>FLUTTERWAVE AVAILABLE BALANCE</span><strong id="personalFlwBalance">Checking…</strong><span class="muted" id="personalFlwStatus">Connecting securely</span></div>
+   <div class="mini-stat"><span>AVAILABLE BALANCE</span><strong id="personalFlwBalance">Checking…</strong><span class="muted" id="personalFlwStatus">Connecting securely</span></div>
    <div class="mini-stat"><span>ACCOUNT HOLDER / NARRATION</span><strong id="personalFlwName">Loading from Flutterwave…</strong><span class="muted">Returned by Flutterwave API when available</span></div>
    <div class="mini-stat"><span>BANK ACCOUNT DETAILS</span><strong id="personalFlwBank">Loading from Flutterwave…</strong><span class="muted">Account number: <span id="personalFlwAccountNumber">Loading…</span></span></div>
   </div>
@@ -52,7 +57,8 @@ async function loadPersonalFlutterwaveBalance(){
   if(!s)throw new Error('Admin session is not ready. Refresh the page and try again.');
   const {data:{session}}=await s.auth.getSession();
   if(!session?.access_token)throw new Error('Please sign in to DBH Admin again.');
-  const {data,error}=await s.functions.invoke('dbh-admin-staff',{body:{action:'personal_flutterwave_balance'}});
+  const orderRef=$('personalFlwOrderRef')?.value?.trim()||'';
+  const {data,error}=await s.functions.invoke('dbh-admin-staff',{body:{action:'personal_flutterwave_balance',order_ref:orderRef}});
   if(error){
    let detail='';
    try{const response=error.context;if(response&&typeof response.clone==='function'){const payload=await response.clone().json();detail=String(payload?.error||payload?.message||'')}}catch(e){}
@@ -79,6 +85,7 @@ async function loadPersonalFlutterwaveBalance(){
  if(btn)btn.disabled=false;
 }
 $('refreshPersonalFlutterwave')?.addEventListener('click',loadPersonalFlutterwaveBalance);
+$('fetchPersonalVirtualAccount')?.addEventListener('click',loadPersonalFlutterwaveBalance);
 async function query(s,table,columns,dateCol){return s.from(table).select(columns).order(dateCol,{ascending:false}).limit(500)}
 async function load(force=false){const s=window.DBHAdminApp?.supabase;if(!s){notice('Admin client is not ready. Reload the page after the admin shell loads.',true);return}if(loading)return;loading=true;$('refresh').disabled=true;$('refresh').innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Refreshing';notice('Reading wallet records from Supabase…');try{const session=await s.auth.getSession();if(!session.data?.session){location.href='login.html';return}
 const specs=[['agentWallets','agent_wallets','id,user_id,currency,available_balance,pending_balance,status,updated_at','updated_at'],['customerWallets','customer_wallets','id,user_id,currency,available_balance,status,updated_at','updated_at'],['agentTransactions','agent_wallet_transactions','id,user_id,transaction_type,direction,amount,currency,status,provider_reference,created_at','created_at'],['customerTransactions','customer_wallet_transactions','id,user_id,transaction_type,direction,amount,currency,status,reference,created_at','created_at']];
