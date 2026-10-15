@@ -69,7 +69,7 @@
         <nav aria-label="Admin navigation">${getNavGroups().map((g,gi)=>`
           <section class="admin-nav-group">
             <div class="admin-nav-heading">${g.title}</div>
-            ${g.items.map(a=>`<a href="${esc(a[0])}" class="admin-nav-link ${current===a[0]?'active':''}" ${current===a[0]?'aria-current="page"':''}><i class="fa-solid fa-${esc(a[2])}"></i><span>${esc(a[1])}</span>${a[3]?`<span class="admin-nav-badge" id="propertyPendingBadge" aria-label="New property submissions" hidden>0</span>`:""}</a>`).join('')}
+            ${g.items.map(a=>`<a href="${esc(a.href)}" class="admin-nav-link ${current===a.href.toLowerCase()?'active':''}" ${current===a.href.toLowerCase()?'aria-current="page"':''}><i class="fa-solid fa-${esc(a.icon)}"></i><span>${esc(a.label)}</span>${a.badge?`<span class="admin-nav-badge" id="propertyPendingBadge" aria-label="New property submissions" hidden>0</span>`:""}</a>`).join('')}
           </section>`).join('')}
         </nav>
       </div>
@@ -193,6 +193,7 @@
     }catch(e){document.body.classList.add('admin-auth-check-failed')}
     return session;
   }
+  window.addEventListener('dbh-sidebar-settings-changed',()=>{renderSidebar();refreshPendingBadge()});
   document.addEventListener('DOMContentLoaded',async()=>{
     ensureStyles();renderSidebar();startPendingBadge();
     document.getElementById('adminMenu')?.addEventListener('click',openSidebar);
