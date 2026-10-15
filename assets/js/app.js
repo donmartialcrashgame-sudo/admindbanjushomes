@@ -39,12 +39,22 @@
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function getNavGroups(){
     const base=groups.map(g=>({title:g.title,items:g.items.map(a=>({href:a[0],label:a[1],icon:a[2],badge:a[3]||''}))}));
+    base.push({title:'ACCESS CONTROL',items:[{href:'staff-permissions.html',label:'Staff Page Permissions',icon:'user-shield',badge:''}]});
     let cfg={};try{cfg=JSON.parse(localStorage.getItem('dbhSidebarCustomizations')||'{}')||{}}catch(e){}
     const labels=cfg.labels||{},hidden=cfg.hidden||{},orders=cfg.orders||{},groupTitles=cfg.groupTitles||{};
     base.forEach(g=>{g.title=groupTitles[g.title]||g.title;g.items=g.items.filter(a=>!hidden[a.href]).map(a=>({...a,label:labels[a.href]||a.label})).sort((a,b)=>(orders[a.href]??9999)-(orders[b.href]??9999));});
     const custom=(Array.isArray(cfg.custom)?cfg.custom:[]).filter(a=>a&&typeof a.href==='string'&&typeof a.label==='string'&&(a.href.startsWith('https://')||/^[a-zA-Z0-9_-]+\.html(?:[?#].*)?$/.test(a.href))).map(a=>({href:a.href,label:a.label,icon:a.icon||'link',badge:'',category:a.category||'CUSTOM LINKS'}));
     custom.forEach(a=>{let group=base.find(g=>g.title.toLowerCase()===String(a.category).toLowerCase());if(!group){group={title:a.category,items:[]};base.push(group)}if(!group.items.some(x=>x.href===a.href))group.items.push(a)});
-    return base;
+    const staff=window.DBHAdminApp?.staff||null;
+    const role=String(staff?.role||'').toLowerCase();
+    const pageRules=staff?.permissions?.pages;
+    const hasRules=pageRules&&typeof pageRules==='object'&&Object.keys(pageRules).length>0;
+    const canView=(href)=>{
+      if(!hasRules||['admin','super_admin'].includes(role))return true;
+      const key=String(href||'').replace(/\.html(?:[?#].*)?$/i,'').replace(/^.*\//,'')||'index';
+      return pageRules[key]?.view===true;
+    };
+    return base.map(g=>({...g,items:g.items.filter(a=>canView(a.href))})).filter(g=>g.items.length);
   }
   function renderSidebar(){
     const mount=document.getElementById('dbhAdminSidebar');
@@ -188,8 +198,13 @@
     window.DBHAdminApp.session=session;
     try{
       const r=await S.functions.invoke('dbh-admin-staff',{body:{action:'access'}});
-      if(r.data?.ok){window.DBHAdminApp.profile=r.data.profile;window.DBHAdminApp.staff=r.data.staff}
-      else document.body.classList.add('admin-auth-check-failed');
+      if(r.data?.ok){window.DBHAdminApp.profile=r.data.profile;window.DBHAdminApp.staff=r.data.staff;renderSidebar();
+        const staff=window.DBHAdminApp.staff,role=String(staff?.role||'').toLowerCase(),rules=staff?.permissions?.pages;
+        const key=(location.pathname.split('/').pop()||'index.html').replace(/\.html(?:[?#].*)?$/i,'');
+        if(rules&&typeof rules==='object'&&Object.keys(rules).length&&!['admin','super_admin'].includes(role)&&rules[key]?.view!==true&&key!=='login'){
+          document.body.innerHTML='<main style="font:16px system-ui;max-width:620px;margin:12vh auto;padding:28px;background:#fff;border:1px solid #dce8f4;border-radius:18px;color:#18334e"><h1 style="color:#052b55">Page access not granted</h1><p>Your DBH administrator has not granted access to this page. Contact your supervisor if you need it for your role.</p><a href="index.html">Return to dashboard</a></main>';return session;
+        }
+      } else document.body.classList.add('admin-auth-check-failed');
     }catch(e){document.body.classList.add('admin-auth-check-failed')}
     return session;
   }
