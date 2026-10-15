@@ -49,9 +49,22 @@
     const role=String(staff?.role||'').toLowerCase();
     const pageRules=staff?.permissions?.pages;
     const hasRules=pageRules&&typeof pageRules==='object'&&Object.keys(pageRules).length>0;
+    const pageKey=(href)=>{
+      const key=String(href||'').replace(/\.html(?:[?#].*)?$/i,'').replace(/^.*\//,'')||'index';
+      const aliases={
+        'index':'index','dashboard':'index',
+        'users':'customers','customer-activity':'customers','saved-properties':'customers',
+        'customer-messages':'customer-care','messages':'messages',
+        'agents':'agents','agent-applications':'agents','agent-documents':'documents',
+        'agent-payments':'payments','agent-listings':'properties',
+        'property-approvals':'properties','property-approvals':'properties',
+        'email-templates':'settings','tools':'settings'
+      };
+      return aliases[key]||key;
+    };
     const canView=(href)=>{
       if(!hasRules||['admin','super_admin'].includes(role))return true;
-      const key=String(href||'').replace(/\.html(?:[?#].*)?$/i,'').replace(/^.*\//,'')||'index';
+      const key=pageKey(href);
       return pageRules[key]?.view===true;
     };
     return base.map(g=>({...g,items:g.items.filter(a=>canView(a.href))})).filter(g=>g.items.length);
@@ -200,8 +213,10 @@
       const r=await S.functions.invoke('dbh-admin-staff',{body:{action:'access'}});
       if(r.data?.ok){window.DBHAdminApp.profile=r.data.profile;window.DBHAdminApp.staff=r.data.staff;renderSidebar();
         const staff=window.DBHAdminApp.staff,role=String(staff?.role||'').toLowerCase(),rules=staff?.permissions?.pages;
-        const key=(location.pathname.split('/').pop()||'index.html').replace(/\.html(?:[?#].*)?$/i,'');
-        if(rules&&typeof rules==='object'&&Object.keys(rules).length&&!['admin','super_admin'].includes(role)&&rules[key]?.view!==true&&key!=='login'){
+        const rawKey=(location.pathname.split('/').pop()||'index.html').replace(/\.html(?:[?#].*)?$/i,'');
+        const aliases={'dashboard':'index','users':'customers','customer-activity':'customers','saved-properties':'customers','customer-messages':'customer-care','agents':'agents','agent-applications':'agents','agent-documents':'documents','agent-payments':'payments','agent-listings':'properties','property-approvals':'properties','email-templates':'settings','tools':'settings'};
+        const key=aliases[rawKey]||rawKey;
+        if(rules&&typeof rules==='object'&&Object.keys(rules).length&&!['admin','super_admin'].includes(role)&&rules[key]?.view!==true&&rawKey!=='login'){
           document.body.innerHTML='<main style="font:16px system-ui;max-width:620px;margin:12vh auto;padding:28px;background:#fff;border:1px solid #dce8f4;border-radius:18px;color:#18334e"><h1 style="color:#052b55">Page access not granted</h1><p>Your DBH administrator has not granted access to this page. Contact your supervisor if you need it for your role.</p><a href="index.html">Return to dashboard</a></main>';return session;
         }
       } else document.body.classList.add('admin-auth-check-failed');
