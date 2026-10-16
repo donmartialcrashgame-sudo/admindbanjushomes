@@ -49,7 +49,7 @@
     const staff=window.DBHAdminApp?.staff||null;
     const role=String(staff?.role||'').toLowerCase();
     const pageRules=staff?.permissions?.pages;
-    const isFullAccess=role==='super_admin'||(role==='admin'&&(!pageRules||typeof pageRules!=='object'||Object.keys(pageRules).length===0));
+    const isFullAccess=role==='super_admin'||(!staff&&String(window.DBHAdminApp?.profile?.role||'').toLowerCase()==='admin');
     const pageKey=(href)=>{
       const key=String(href||'').replace(/\.html(?:[?#].*)?$/i,'').replace(/^.*\//,'')||'index';
       const aliases={
@@ -216,7 +216,7 @@
         const aliases={'dashboard':'index','users':'customers','customer-activity':'customers','saved-properties':'customers','customer-messages':'customer-care','agents':'agents','agent-applications':'agents','agent-documents':'documents','agent-payments':'payments','agent-listings':'properties','property-approvals':'properties','email-templates':'settings','tools':'settings'};
         const key=aliases[rawKey]||rawKey;
         const hasRules=rules&&typeof rules==='object'&&Object.keys(rules).length>0;
-        const fullAccess=role==='super_admin'||(role==='admin'&&!hasRules);
+        const fullAccess=role==='super_admin'||(!staff&&String(window.DBHAdminApp.profile?.role||'').toLowerCase()==='admin');
         if(!fullAccess&&rules?.[key]?.view!==true&&rawKey!=='login'){
           document.body.innerHTML='<main style="font:16px system-ui;max-width:620px;margin:12vh auto;padding:28px;background:#fff;border:1px solid #dce8f4;border-radius:18px;color:#18334e"><h1 style="color:#052b55">Page access not granted</h1><p>Your DBH administrator has not enabled this page for your account. Contact your supervisor if you need it.</p><a href="index.html">Return to dashboard</a></main>';return session;
         }
