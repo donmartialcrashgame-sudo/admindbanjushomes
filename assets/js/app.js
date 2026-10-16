@@ -64,7 +64,7 @@
     };
     const canView=(href)=>{
       if(isFullAccess)return true;
-      if(!pageRules||typeof pageRules!=='object')return false;
+      if(!pageRules||typeof pageRules!=='object'||Object.keys(pageRules).length===0)return pageKey(href)==='index';
       return pageRules[pageKey(href)]?.view===true;
     };
     return base.map(g=>({...g,items:g.items.filter(a=>canView(a.href))})).filter(g=>g.items.length);
@@ -217,7 +217,7 @@
         const key=aliases[rawKey]||rawKey;
         const hasRules=rules&&typeof rules==='object'&&Object.keys(rules).length>0;
         const fullAccess=role==='super_admin'||(!staff&&String(window.DBHAdminApp.profile?.role||'').toLowerCase()==='admin');
-        if(!fullAccess&&rules?.[key]?.view!==true&&rawKey!=='login'){
+        if(!fullAccess&&((!hasRules&&rawKey!=='index')||(hasRules&&rules?.[key]?.view!==true))&&rawKey!=='login'){
           document.body.innerHTML='<main style="font:16px system-ui;max-width:620px;margin:12vh auto;padding:28px;background:#fff;border:1px solid #dce8f4;border-radius:18px;color:#18334e"><h1 style="color:#052b55">Page access not granted</h1><p>Your DBH administrator has not enabled this page for your account. Contact your supervisor if you need it.</p><a href="index.html">Return to dashboard</a></main>';return session;
         }
         try{await S.functions.invoke('dbh-admin-staff',{body:{action:'touch'}})}catch(e){}
