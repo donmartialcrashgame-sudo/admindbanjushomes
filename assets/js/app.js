@@ -133,6 +133,7 @@
     document.body.classList.remove('admin-nav-open');
   }
   function ensureStyles(){
+    if(!document.getElementById('dbh-font-awesome')){const fa=document.createElement('link');fa.id='dbh-font-awesome';fa.rel='stylesheet';fa.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css';fa.referrerPolicy='no-referrer';document.head.appendChild(fa)}
     if(document.getElementById('dbh-admin-shell-styles'))return;
     const style=document.createElement('style');style.id='dbh-admin-shell-styles';style.textContent=`
       .admin-side{position:fixed!important;inset:0 auto 0 0!important;width:265px!important;display:flex!important;flex-direction:column!important;z-index:1000!important;background:rgba(255,255,255,.97)!important;border-right:1px solid #dce8f4!important;padding:17px 13px 12px!important;box-shadow:14px 0 42px #052b5512!important;backdrop-filter:blur(18px)!important;transform:translateX(0);transition:transform .28s ease!important;font-family:Inter,system-ui,sans-serif}
