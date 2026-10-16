@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<title>Accept Staff Invitation | DBH</title>
+<link rel="icon" href="https://dbanjushomes-com.onrender.com/dbh-logo.jpg">
+<style>
+:root{--blue:#0868cf;--navy:#062b52;--ink:#15324f;--muted:#6a7f95;--line:#dbe8f5}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 10%,#dceeff 0,transparent 34%),linear-gradient(135deg,#f5f9ff,#edf5ff);font:15px Inter,Arial,sans-serif;color:var(--ink);display:grid;place-items:center;padding:24px}
+.shell{width:min(100%,980px);min-height:610px;display:grid;grid-template-columns:1fr 1fr;background:#fff;border:1px solid #e2edf8;border-radius:28px;overflow:hidden;box-shadow:0 28px 90px #052b5218}
+.brand{position:relative;overflow:hidden;background:linear-gradient(145deg,#062b52,#0868cf);padding:44px 38px;color:#fff;display:flex;flex-direction:column;justify-content:space-between}
+.brand:before,.brand:after{content:"";position:absolute;border:1px solid #ffffff20;border-radius:50%;width:360px;height:360px;right:-180px;top:15%}.brand:after{width:260px;height:260px;right:-130px;top:24%}
+.logo{position:relative;z-index:1;display:flex;align-items:center;gap:12px}.logo img{width:54px;height:54px;object-fit:contain;border-radius:15px;background:#fff;padding:4px}.logo strong{display:block;letter-spacing:2px;font-size:20px}.logo small{display:block;font-size:9px;letter-spacing:1.4px;color:#d6e9ff;margin-top:5px}
+.brand-copy{position:relative;z-index:1}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:900;color:#a9d4ff}.brand h1{font-size:34px;line-height:1.13;margin:14px 0}.brand p{font-size:14px;line-height:1.9;color:#d9eaff;max-width:360px}.brand-foot{position:relative;z-index:1;color:#c6e0ff;font-size:11px}
+.content{padding:50px 42px;display:flex;flex-direction:column;justify-content:center}.step{display:inline-flex;align-items:center;gap:8px;background:#eaf4ff;color:var(--blue);border-radius:30px;padding:8px 12px;font-size:10px;font-weight:900;letter-spacing:1px;width:max-content}
+h2{font-size:28px;color:var(--navy);margin:20px 0 9px;letter-spacing:-.6px}.intro{color:var(--muted);font-size:13px;line-height:1.8;margin:0 0 24px}
+.field{margin:0 0 15px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:8px;color:#284761}.wrap{position:relative}.field input{width:100%;border:1px solid #d5e3f1;border-radius:12px;padding:14px 46px 14px 13px;background:#f8fbff;font:14px Arial;outline:none}.field input:focus{border-color:#1681ed;box-shadow:0 0 0 4px #1681ed15}.toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#617d99;padding:7px;cursor:pointer}
+.rules{background:#f5f9fe;border:1px solid #e4eef8;border-radius:12px;padding:12px 14px;margin:3px 0 18px}.rules div{font-size:11px;color:#647c93;margin:5px 0}.rules .ok{color:#087d55}.submit{width:100%;border:0;border-radius:12px;background:linear-gradient(100deg,#075fc4,#1285e8);color:#fff;padding:15px;font-weight:900;cursor:pointer;box-shadow:0 10px 22px #0868cf25}.submit:disabled{opacity:.6;cursor:wait}.msg{display:none;margin-top:14px;padding:12px;border-radius:10px;font-size:12px;line-height:1.6}.msg.show{display:block}.msg.error{background:#fff0f0;color:#a52121;border:1px solid #ffd9d9}.msg.success{background:#ecfdf5;color:#086b4a;border:1px solid #c6f2dd}.help{font-size:11px;color:#8a9bad;line-height:1.7;margin-top:18px}
+@media(max-width:760px){body{padding:12px}.shell{grid-template-columns:1fr;min-height:auto;border-radius:20px}.brand{padding:22px 24px;min-height:220px}.brand h1{font-size:26px}.brand-copy p{margin-bottom:0}.brand-foot{margin-top:24px}.content{padding:30px 24px 34px}.content h2{font-size:25px}}
+</style>
+</head>
+<body>
+<main class="shell">
+<section class="brand">
+  <div class="logo"><img src="https://dbanjushomes-com.onrender.com/dbh-logo.jpg" alt="DBH logo"><div><strong>DBH</strong><small>D BANJUS HOMES NIG LTD</small></div></div>
+  <div class="brand-copy"><div class="eyebrow">PRIVATE STAFF ACCESS</div><h1>Your DBH workspace starts here.</h1><p>Set a secure password to activate your staff account. Your administrator controls which pages and actions are available to you.</p></div>
+  <div class="brand-foot">Dream it, we build it. · Secure invitation setup</div>
+</section>
+<section class="content">
+  <div class="step"> <span>01</span> &nbsp; INVITATION ACCEPTANCE</div>
+  <h2>Create your password</h2>
+  <p class="intro">Choose a strong password for your DBH admin account. After saving it, you will be taken to the administration portal.</p>
+  <form id="passwordForm">
+    <div class="field"><label for="password">New password</label><div class="wrap"><input id="password" type="password" autocomplete="new-password" minlength="10" required placeholder="At least 10 characters"><button class="toggle" type="button" data-target="password" aria-label="Show password">Show</button></div></div>
+    <div class="field"><label for="confirmPassword">Confirm password</label><div class="wrap"><input id="confirmPassword" type="password" autocomplete="new-password" minlength="10" required placeholder="Enter it again"><button class="toggle" type="button" data-target="confirmPassword" aria-label="Show confirmation password">Show</button></div></div>
+    <div class="rules"><div id="ruleLength">○ At least 10 characters</div><div id="ruleMatch">○ Both passwords must match</div></div>
+    <button class="submit" id="submit" type="submit">Set password &amp; continue <span aria-hidden="true">→</span></button>
+    <div class="msg" id="message" role="status" aria-live="polite"></div>
+  </form>
+  <p class="help">This page is only for invited staff. Invitation links expire and should not be shared. If your link has expired, ask an administrator to send a new invitation.</p>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(()=>{
+const SUPABASE_URL='https://cpgajlsyuieeengdnamy.supabase.co';
+const SUPABASE_KEY='sb_publishable_fbcJT-QGKyZg0tDkpbDkOQ_CcQf2ugW';
+const S=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{flowType:'pkce',detectSessionInUrl:true,persistSession:true,autoRefreshToken:true}});
+const $=id=>document.getElementById(id),form=$('passwordForm'),button=$('submit'),message=$('message');
+function say(text,type){message.textContent=text;message.className='msg show '+type}
+function updateRules(){const p=$('password').value,c=$('confirmPassword').value;const length=p.length>=10;const match=!!p&&p===c;$('ruleLength').textContent=(length?'✓':'○')+' At least 10 characters';$('ruleLength').className=length?'ok':'';$('ruleMatch').textContent=(match?'✓':'○')+' Both passwords must match';$('ruleMatch').className=match?'ok':''}
+document.querySelectorAll('.toggle').forEach(b=>b.addEventListener('click',()=>{const input=$(b.dataset.target);input.type=input.type==='password'?'text':'password';b.textContent=input.type==='password'?'Show':'Hide'}));
+$('password').addEventListener('input',updateRules);$('confirmPassword').addEventListener('input',updateRules);
+async function prepareSession(){
+  const url=new URL(location.href),code=url.searchParams.get('code');
+  if(code){const {error}=await S.auth.exchangeCodeForSession(code);if(error)throw error;url.searchParams.delete('code');history.replaceState({},document.title,url.pathname+url.search+url.hash)}
+  const hash=new URLSearchParams(location.hash.replace(/^#/,''));
+  const access=hash.get('access_token'),refresh=hash.get('refresh_token');
+  if(access&&refresh){const {error}=await S.auth.setSession({access_token:access,refresh_token:refresh});if(error)throw error;history.replaceState({},document.title,location.pathname+location.search)}
+  const {data,error}=await S.auth.getSession();if(error)throw error;
+  if(!data.session)throw new Error('This invitation link is invalid or has expired. Ask your DBH administrator for a new invitation.');
+  const {data:userData,error:userError}=await S.auth.getUser();if(userError||!userData.user)throw new Error('We could not verify this invitation session. Please request a new link.');
+  return userData.user;
+}
+let inviteUser=null;
+prepareSession().then(user=>{inviteUser=user;if(user.user_metadata?.full_name){$('confirmPassword').setAttribute('aria-label','Confirm password for '+user.user_metadata.full_name)}}).catch(e=>{button.disabled=true;button.textContent='Invitation link unavailable';say(e.message||'This invitation link is invalid or expired. Request a new one from your administrator.','error')});
+form.addEventListener('submit',async e=>{e.preventDefault();const p=$('password').value,c=$('confirmPassword').value;if(p.length<10){say('Please use at least 10 characters for your password.','error');return}if(p!==c){say('The passwords do not match.','error');return}if(!inviteUser){say('The invitation has not been verified. Open the original email link or request a new one.','error');return}
+button.disabled=true;button.textContent='Securing your account…';
+try{const {data,error}=await S.auth.updateUser({password:p});if(error)throw error;if(!data.user)throw new Error('The password could not be confirmed. Please try again.');say('Your password has been saved. Taking you to the DBH admin portal…','success');$('password').value='';$('confirmPassword').value='';setTimeout(()=>location.replace('https://admin.dbanjushomes.online/index.html'),1100)}
+catch(err){say(err.message||'Could not save your password. Please try again.','error');button.disabled=false;button.innerHTML='Set password &amp; continue <span aria-hidden="true">→</span>'}
+});
+})();
+</script>
+</body></html>
