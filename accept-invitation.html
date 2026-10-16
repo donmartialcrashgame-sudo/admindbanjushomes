@@ -31,13 +31,13 @@ h2{font-size:28px;color:var(--navy);margin:20px 0 9px;letter-spacing:-.6px}.intr
   <div class="step"> <span>01</span> &nbsp; INVITATION ACCEPTANCE</div>
   <h2>Create your password</h2>
   <p class="intro">Choose a strong password for your DBH admin account. After saving it, you will be taken to the administration portal.</p>
-  <form id="passwordForm">
+  <form id="passwordForm" style="display:none">
     <div class="field"><label for="password">New password</label><div class="wrap"><input id="password" type="password" autocomplete="new-password" minlength="10" required placeholder="At least 10 characters"><button class="toggle" type="button" data-target="password" aria-label="Show password">Show</button></div></div>
     <div class="field"><label for="confirmPassword">Confirm password</label><div class="wrap"><input id="confirmPassword" type="password" autocomplete="new-password" minlength="10" required placeholder="Enter it again"><button class="toggle" type="button" data-target="confirmPassword" aria-label="Show confirmation password">Show</button></div></div>
     <div class="rules"><div id="ruleLength">○ At least 10 characters</div><div id="ruleMatch">○ Both passwords must match</div></div>
     <button class="submit" id="submit" type="submit">Set password &amp; continue <span aria-hidden="true">→</span></button>
-    <div class="msg" id="message" role="status" aria-live="polite"></div>
   </form>
+  <div class="msg" id="message" role="status" aria-live="polite"></div>
   <p class="help">This page is only for invited staff. Invitation links expire and should not be shared. If your link has expired, ask an administrator to send a new invitation.</p>
 </section>
 </main>
@@ -61,14 +61,16 @@ async function prepareSession(){
   const {data,error}=await S.auth.getSession();if(error)throw error;
   if(!data.session)throw new Error('This invitation link is invalid or has expired. Ask your DBH administrator for a new invitation.');
   const {data:userData,error:userError}=await S.auth.getUser();if(userError||!userData.user)throw new Error('We could not verify this invitation session. Please request a new link.');
+  const {data:validation,error:validationError}=await S.functions.invoke("dbh-admin-staff",{body:{action:"validate_invitation"}});
+  if(validationError||validation?.ok!==true)throw new Error(validation?.error||validationError?.message||"This invitation is invalid or has expired. Ask your administrator for a new invitation.");
   return userData.user;
 }
 let inviteUser=null;
-prepareSession().then(user=>{inviteUser=user;if(user.user_metadata?.full_name){$('confirmPassword').setAttribute('aria-label','Confirm password for '+user.user_metadata.full_name)}}).catch(e=>{button.disabled=true;button.textContent='Invitation link unavailable';say(e.message||'This invitation link is invalid or expired. Request a new one from your administrator.','error')});
+prepareSession().then(user=>{inviteUser=user;form.style.display="block";if(user.user_metadata?.full_name){$('confirmPassword').setAttribute('aria-label','Confirm password for '+user.user_metadata.full_name)}}).catch(e=>{inviteUser=null;form.style.display="none";button.disabled=true;button.textContent='Invitation link unavailable';say(e.message||'This invitation link is invalid or expired. Request a new one from your administrator.','error')});
 form.addEventListener('submit',async e=>{e.preventDefault();const p=$('password').value,c=$('confirmPassword').value;if(p.length<10){say('Please use at least 10 characters for your password.','error');return}if(p!==c){say('The passwords do not match.','error');return}if(!inviteUser){say('The invitation has not been verified. Open the original email link or request a new one.','error');return}
 button.disabled=true;button.textContent='Securing your account…';
 try{const {data,error}=await S.auth.updateUser({password:p});if(error)throw error;if(!data.user)throw new Error('The password could not be confirmed. Please try again.');const {data:accepted,error:acceptError}=await S.functions.invoke('dbh-admin-staff',{body:{action:'accept_invitation'}});if(acceptError||accepted?.error||accepted?.ok!==true)throw new Error(accepted?.error||acceptError?.message||'Your password was saved, but DBH could not activate your invitation. Contact your administrator.');say('Your password is saved and your invitation is accepted. Opening the DBH admin portal…','success');$('password').value='';$('confirmPassword').value='';setTimeout(()=>location.replace('https://admin.dbanjushomes.online/index.html'),1100)}
-catch(err){say(err.message||'Could not save your password. Please try again.','error');button.disabled=false;button.innerHTML='Set password &amp; continue <span aria-hidden="true">→</span>'}
+catch(err){const msg=err.message||'Could not save your password. Please try again.';say(msg,'error');if(/expired|already been used|no longer available/i.test(msg)){form.style.display="none";button.disabled=true}else{button.disabled=false;button.innerHTML='Set password &amp; continue <span aria-hidden="true">→</span>'}}
 });
 })();
 </script>
