@@ -214,7 +214,7 @@
         renderSidebar();
         const staff=window.DBHAdminApp.staff,role=String(staff?.role||'').toLowerCase(),rules=staff?.permissions?.pages;
         const rawKey=(location.pathname.split('/').pop()||'index.html').replace(/\.html(?:[?#].*)?$/i,'');
-        const aliases={'dashboard':'index','users':'customers','customer-activity':'customers','saved-properties':'customers','customer-messages':'customer-care','agents':'agents','agent-applications':'agents','agent-documents':'documents','agent-payments':'payments','agent-listings':'properties','property-approvals':'properties','email-templates':'settings','tools':'settings'};
+        const aliases={'dashboard':'index','users':'customers','customer-activity':'customers','saved-properties':'customers','customer-messages':'customer-care','agents':'agents','agent-applications':'agents','agent-documents':'documents','agent-payments':'payments','agent-listings':'properties','property-approvals':'properties','email-templates':'settings','tools':'settings','add-property':'properties'};
         const key=aliases[rawKey]||rawKey;
         const hasRules=rules&&typeof rules==='object'&&Object.keys(rules).length>0;
         const fullAccess=role==='super_admin'||(!staff&&String(window.DBHAdminApp.profile?.role||'').toLowerCase()==='admin');
