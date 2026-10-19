@@ -21,6 +21,7 @@
     ]},
     {title:'PROPERTY MANAGEMENT',items:[
       ['properties.html','All Properties','house-chimney'],
+      ['add-property.html','Add Property','circle-plus'],
       ['property-approvals.html','Pending Approvals','clipboard-check','property-pending'],
       ['documents.html','Property Documents','file-shield']
     ]},
