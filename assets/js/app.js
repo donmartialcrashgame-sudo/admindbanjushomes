@@ -22,6 +22,10 @@
     {title:'PROPERTY MANAGEMENT',items:[
       ['properties.html','All Properties','house-chimney'],
       ['property-categories.html','Property Categories','layer-group'],
+      ['houses.html','Houses Inventory','house'],
+      ['land-properties.html','Land Inventory','map'],
+      ['commercial-properties.html','Commercial Inventory','store'],
+      ['rental-properties.html','Rental Inventory','key'],
       ['add-house.html','Add House / Residential','house'],
       ['add-land.html','Add Land / Plots','map'],
       ['add-commercial.html','Add Commercial Property','store'],
