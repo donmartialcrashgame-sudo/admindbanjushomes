@@ -21,7 +21,11 @@
     ]},
     {title:'PROPERTY MANAGEMENT',items:[
       ['properties.html','All Properties','house-chimney'],
-      ['property-categories.html','Property Categories','layer-group'],\n      ['add-house.html','Add House / Residential','house'],\n      ['add-land.html','Add Land / Plots','map'],\n      ['add-commercial.html','Add Commercial Property','store'],\n      ['add-rental.html','Add Rental Property','key'],
+      ['property-categories.html','Property Categories','layer-group'],
+      ['add-house.html','Add House / Residential','house'],
+      ['add-land.html','Add Land / Plots','map'],
+      ['add-commercial.html','Add Commercial Property','store'],
+      ['add-rental.html','Add Rental Property','key'],
       ['pending-review.html','Pending Review','clipboard-list','property-pending'],
       ['property-approvals.html','Approve & Publish','clipboard-check'],
       ['documents.html','Property Documents','file-shield']
