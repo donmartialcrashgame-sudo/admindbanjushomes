@@ -22,7 +22,8 @@
     {title:'PROPERTY MANAGEMENT',items:[
       ['properties.html','All Properties','house-chimney'],
       ['add-property.html','Add Property','circle-plus'],
-      ['property-approvals.html','Pending Approvals','clipboard-check','property-pending'],
+      ['pending-review.html','Pending Review','clipboard-list','property-pending'],
+      ['property-approvals.html','Approve & Publish','clipboard-check'],
       ['documents.html','Property Documents','file-shield']
     ]},
     {title:'PLATFORM',items:[
@@ -59,7 +60,7 @@
         'customer-messages':'customer-care','messages':'messages',
         'agents':'agents','agent-applications':'agents','agent-documents':'documents',
         'agent-payments':'payments','agent-listings':'properties',
-        'property-approvals':'properties','email-templates':'settings','tools':'settings'
+        'property-approvals':'properties','pending-review':'properties','email-templates':'settings','tools':'settings'
       };
       return aliases[key]||key;
     };
