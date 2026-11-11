@@ -69,7 +69,7 @@
         'customer-messages':'customer-care','messages':'messages',
         'agents':'agents','agent-applications':'agents','agent-documents':'documents',
         'agent-payments':'payments','agent-listings':'properties',
-        'property-approvals':'properties','pending-review':'properties','email-templates':'settings','tools':'settings'
+        'property-approvals':'properties','pending-review':'properties','inspection-bookings':'properties','email-templates':'settings','tools':'settings'
       };
       return aliases[key]||key;
     };
